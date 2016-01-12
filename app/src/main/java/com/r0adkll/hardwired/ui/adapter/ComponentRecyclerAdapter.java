@@ -34,7 +34,7 @@ public class ComponentRecyclerAdapter extends BetterRecyclerAdapter<Component, R
      * Constructor
      */
     public ComponentRecyclerAdapter(){
-        setHasStableIds(true);
+        super();
 
         delegatesManager = new AdapterDelegatesManager<>();
         delegatesManager.addDelegate(new MotherboardDelegate());

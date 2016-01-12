@@ -3,6 +3,8 @@ package com.r0adkll.hardwired.ui;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SimpleItemAnimator;
 
 import com.ftinc.kit.util.RxUtils;
 import com.ftinc.kit.widget.EmptyView;
@@ -57,6 +59,11 @@ public class Hardwired extends RxAppCompatActivity {
         adapter = new ComponentRecyclerAdapter();
         recycler.setAdapter(adapter);
         adapter.setEmptyView(emptyLayout);
+
+        RecyclerView.ItemAnimator animator = recycler.getItemAnimator();
+        if (animator instanceof SimpleItemAnimator) {
+            ((SimpleItemAnimator) animator).setSupportsChangeAnimations(false);
+        }
     }
 
     @Override
@@ -64,10 +71,13 @@ public class Hardwired extends RxAppCompatActivity {
         super.onResume();
 
 
-        OpenHardwareMonitor.readTest().repeat().delay(5, TimeUnit.SECONDS)
+        OpenHardwareMonitor.readTest()
+                .delay(5, TimeUnit.SECONDS)
+                .repeat()
                 .compose(RxUtils.applyIOSchedulers())
                 .compose(bindToLifecycle())
                 .subscribe(computer -> {
+                    Timber.d("Updating Computer");
                     adapter.clear();
                     adapter.addAll(computer.components);
                     adapter.notifyDataSetChanged();

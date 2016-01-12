@@ -129,4 +129,34 @@ public class Component {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Component component = (Component) o;
+
+        if (id != component.id) return false;
+        if (title != null ? !title.equals(component.title) : component.title != null) return false;
+        if (components != null ? !components.equals(component.components) : component.components != null)
+            return false;
+        if (value != null ? !value.equals(component.value) : component.value != null) return false;
+        if (min != null ? !min.equals(component.min) : component.min != null) return false;
+        if (max != null ? !max.equals(component.max) : component.max != null) return false;
+        return imageUri != null ? imageUri.equals(component.imageUri) : component.imageUri == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (title != null ? title.hashCode() : 0);
+        result = 31 * result + (components != null ? components.hashCode() : 0);
+        result = 31 * result + (value != null ? value.hashCode() : 0);
+        result = 31 * result + (min != null ? min.hashCode() : 0);
+        result = 31 * result + (max != null ? max.hashCode() : 0);
+        result = 31 * result + (imageUri != null ? imageUri.hashCode() : 0);
+        return result;
+    }
+
 }
