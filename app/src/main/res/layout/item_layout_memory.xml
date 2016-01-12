@@ -8,7 +8,7 @@
     <android.support.v7.widget.CardView
         android:id="@+id/card"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="175dp"
         android:layout_margin="4dp"
 
         app:cardCornerRadius="2dp"
@@ -24,7 +24,7 @@
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="16dp"
+                android:paddingLeft="10dp"
                 android:paddingTop="8dp"
 
                 tools:text="RAM"
@@ -33,8 +33,30 @@
                 android:fontFamily="sans-serif-medium"
                 />
 
+            <TextView
+                android:id="@+id/load_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
 
+                tools:text="23%"
+                android:textSize="48sp"
+                android:textColor="@color/white"
+                />
 
+            <TextView
+                android:id="@+id/data"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:padding="8dp"
+                android:gravity="center"
+
+                tools:text="3 Gb / 13 Gb"
+                android:textColor="@color/white"
+                android:fontFamily="sans-serif-medium"
+                />
 
         </RelativeLayout>
 
