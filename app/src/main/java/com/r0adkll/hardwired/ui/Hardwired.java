@@ -70,7 +70,6 @@ public class Hardwired extends RxAppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-
         OpenHardwareMonitor.readTest()
                 .delay(5, TimeUnit.SECONDS)
                 .repeat()
