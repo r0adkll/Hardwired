@@ -10,15 +10,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
+        android:minHeight="@dimen/card_height"
 
         app:cardCornerRadius="2dp"
-        app:cardElevation="4dp"
+        app:cardElevation="@dimen/card_elevation"
         app:cardBackgroundColor="@color/red_400"
         >
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/title"
@@ -40,8 +41,6 @@
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
                 android:layout_centerVertical="true"
-                android:layout_below="@+id/title"
-                android:layout_alignBottom="@+id/cores_layout"
                 android:gravity="center"
 
                 tools:text="23.8%"

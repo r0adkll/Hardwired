@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Hardwired</string>
+    <string name="temperature">Temp</string>
+    <string name="memory">Memory</string>
+    <string name="core">Core</string>
+    <string name="fan_speed">Fan Speed</string>
+    <string name="n_a">N/A</string>
 </resources>

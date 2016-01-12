@@ -2,6 +2,7 @@ package com.r0adkll.hardwired.data.model;
 
 import android.support.annotation.IntDef;
 
+import com.ftinc.kit.util.RxUtils;
 import com.google.gson.annotations.SerializedName;
 
 import java.lang.annotation.Retention;
@@ -17,20 +18,44 @@ import java.util.List;
  */
 public class Component {
 
+    public <T extends Component> T getComponent(Class<T> clazz){
+        try {
+            T cmp = clazz.newInstance();
+            cmp.copy(this);
+            return cmp;
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    void copy(Component c) {
+        id = c.id;
+        title = c.title;
+        components = c.components;
+        value = c.value;
+        min = c.min;
+        max = c.max;
+        imageUri = c.imageUri;
+    }
+
     /***********************************************************************************************
      *
      * Constants
      *
      */
 
-    public static final int COMPUTER = 0;
-    public static final int MOTHERBOARD = 1;
-    public static final int MEMORY = 2;
-    public static final int CPU = 3;
-    public static final int GRAPHICS = 4;
-    public static final int HDD = 5;
-    public static final int SSD = 6;
-    public static final int UNKNOWN = 7;
+    public static final int COMPUTER = 1;
+    public static final int MOTHERBOARD = 2;
+    public static final int MEMORY = 4;
+    public static final int CPU = 8;
+    public static final int GRAPHICS = 16;
+    public static final int HDD = 32;
+    public static final int SSD = 64;
+    public static final int UNKNOWN = 128;
 
     @IntDef({COMPUTER, MOTHERBOARD, MEMORY, CPU, GRAPHICS, HDD, SSD, UNKNOWN})
     @Retention(RetentionPolicy.SOURCE)
@@ -89,6 +114,19 @@ public class Component {
         }else{
             return UNKNOWN;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Component{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", components=" + components +
+                ", value='" + value + '\'' +
+                ", min='" + min + '\'' +
+                ", max='" + max + '\'' +
+                ", imageUri='" + imageUri + '\'' +
+                '}';
     }
 
 }

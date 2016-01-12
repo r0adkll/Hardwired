@@ -1,14 +1,21 @@
 package com.r0adkll.hardwired.ui.adapter.delegates;
 
-import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.r0adkll.hardwired.R;
+import com.r0adkll.hardwired.data.model.Clock;
 import com.r0adkll.hardwired.data.model.Component;
+import com.r0adkll.hardwired.data.model.Fan;
+import com.r0adkll.hardwired.data.model.GPU;
+import com.r0adkll.hardwired.data.model.Load;
+import com.r0adkll.hardwired.data.model.Temperature;
 import com.r0adkll.hardwired.ui.adapter.ComponentDelegate;
+import com.r0adkll.hardwired.ui.adapter.ComponentViewHolder;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
@@ -16,49 +23,98 @@ import butterknife.ButterKnife;
  * Package: com.r0adkll.hardwired.ui.adapter.delegates
  * Created by drew.heavner on 1/11/16.
  */
-public class GraphicsDelegate extends ComponentDelegate<GraphicsDelegate.GraphicsViewHolder> {
+public class GraphicsDelegate extends ComponentDelegate<GPU, GraphicsDelegate.GraphicsViewHolder> {
 
     public GraphicsDelegate() {
-        super(Component.GRAPHICS);
+        super(Component.GRAPHICS, GPU.class);
     }
 
     /***********************************************************************************************
-     *
      * Delegate Methods
-     *
      */
 
     @Override
     public GraphicsViewHolder onCreateViewHolder(LayoutInflater inflater, ViewGroup parent) {
-        return GraphicsViewHolder.create(inflater, parent);
+        return new GraphicsViewHolder(inflater, parent);
     }
 
     @Override
-    public void onBindViewHolder(GraphicsViewHolder viewHolder, Component item, int position) {
-        viewHolder.bind(item);
+    public void onBindViewHolder(GraphicsViewHolder viewHolder, GPU item, int position) {
+        viewHolder.bindData(item);
     }
 
+
     /***********************************************************************************************
-     *
      * ViewHolder
-     *
      */
 
-    static class GraphicsViewHolder extends RecyclerView.ViewHolder{
+    static class GraphicsViewHolder extends ComponentViewHolder<GPU> {
 
-        public static GraphicsViewHolder create(LayoutInflater inflater, ViewGroup parent){
-            View view = inflater.inflate(R.layout.item_layout_graphics, parent, false);
-            return new GraphicsViewHolder(view);
-        }
+        @Bind(R.id.title)
+        TextView title;
+        @Bind(R.id.load_total)
+        TextView loadTotal;
 
-        public GraphicsViewHolder(View itemView){
-            super(itemView);
+        @Bind(R.id.core_clock_speed)
+        TextView coreClockSpeed;
+        @Bind(R.id.memory_clock_speed)
+        TextView memoryClockSpeed;
+        @Bind(R.id.temperature)
+        TextView temperature;
+        @Bind(R.id.fan_speed)
+        TextView fanSpeed;
+
+        @Bind(R.id.card)
+        CardView card;
+
+        public GraphicsViewHolder(LayoutInflater inflater, ViewGroup parent) {
+            super(inflater, parent, R.layout.item_layout_graphics);
             ButterKnife.bind(this, itemView);
         }
 
-        public void bind(Component item){
-
+        @Override
+        public int getColumnSpan() {
+            return 2;
         }
 
+        @Override
+        protected void bind(GPU item) {
+
+            title.setText(item.title);
+
+            Load load = item.getLoad();
+            if(load != null){
+                loadTotal.setText(String.format("%.1f%%", load.getValue()));
+            }
+
+            Clock core = item.getCoreClock();
+            if(core != null){
+                coreClockSpeed.setText(core.value);
+            }else{
+                coreClockSpeed.setText(R.string.n_a);
+            }
+
+            Clock memory = item.getMemoryClock();
+            if(memory != null){
+                memoryClockSpeed.setText(memory.value);
+            }else{
+                memoryClockSpeed.setText(R.string.n_a);
+            }
+
+            Temperature temp = item.getTemperature();
+            if(temp != null){
+                temperature.setText(temp.value);
+            }else{
+                temperature.setText(R.string.n_a);
+            }
+
+            Fan fan = item.getFan();
+            if (fan != null) {
+                fanSpeed.setText(fan.value);
+            }else{
+                fanSpeed.setText(R.string.n_a);
+            }
+
+        }
     }
 }

@@ -1,8 +1,10 @@
 package com.r0adkll.hardwired.ui.adapter;
 
+import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.hannesdorfmann.adapterdelegates.AdapterDelegate;
@@ -16,13 +18,16 @@ import java.util.List;
  * Package: com.r0adkll.hardwired.ui.adapter
  * Created by drew.heavner on 1/11/16.
  */
-public abstract class ComponentDelegate<VH extends RecyclerView.ViewHolder> implements AdapterDelegate<List<Component>> {
+public abstract class ComponentDelegate<T extends Component, VH extends ComponentViewHolder<T>> implements AdapterDelegate<List<Component>> {
 
     @Components
     protected int viewType = Component.UNKNOWN;
 
-    protected ComponentDelegate(@Components int viewType){
+    protected Class<T> clazz;
+
+    protected ComponentDelegate(int viewType, Class<T> clazz){
         this.viewType = viewType;
+        this.clazz = clazz;
     }
 
     /***********************************************************************************************
@@ -38,7 +43,8 @@ public abstract class ComponentDelegate<VH extends RecyclerView.ViewHolder> impl
 
     @Override
     public boolean isForViewType(@NonNull List<Component> items, int position) {
-        return items.get(position).getType() == viewType;
+        int itemType = items.get(position).getType();
+        return (viewType & itemType) == itemType;
     }
 
     @NonNull
@@ -49,7 +55,7 @@ public abstract class ComponentDelegate<VH extends RecyclerView.ViewHolder> impl
 
     @Override
     public void onBindViewHolder(@NonNull List<Component> items, int position, @NonNull RecyclerView.ViewHolder holder) {
-        onBindViewHolder((VH) holder, items.get(position), position);
+        onBindViewHolder((VH) holder, items.get(position).getComponent(clazz), position);
     }
 
     /***********************************************************************************************
@@ -60,6 +66,6 @@ public abstract class ComponentDelegate<VH extends RecyclerView.ViewHolder> impl
 
     public abstract VH onCreateViewHolder(LayoutInflater inflater, ViewGroup parent);
 
-    public abstract void onBindViewHolder(VH viewHolder, Component item, int position);
+    public abstract void onBindViewHolder(VH viewHolder, T item, int position);
 
 }

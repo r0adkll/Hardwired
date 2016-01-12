@@ -1,14 +1,19 @@
 package com.r0adkll.hardwired.ui.adapter.delegates;
 
-import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.r0adkll.hardwired.R;
 import com.r0adkll.hardwired.data.model.Component;
+import com.r0adkll.hardwired.data.model.Data;
+import com.r0adkll.hardwired.data.model.Load;
+import com.r0adkll.hardwired.data.model.RAM;
 import com.r0adkll.hardwired.ui.adapter.ComponentDelegate;
+import com.r0adkll.hardwired.ui.adapter.ComponentViewHolder;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
@@ -16,49 +21,68 @@ import butterknife.ButterKnife;
  * Package: com.r0adkll.hardwired.ui.adapter.delegates
  * Created by drew.heavner on 1/11/16.
  */
-public class MemoryDelegate extends ComponentDelegate<MemoryDelegate.MemoryViewHolder> {
+public class MemoryDelegate extends ComponentDelegate<RAM, MemoryDelegate.MemoryViewHolder> {
 
     public MemoryDelegate() {
-        super(Component.MEMORY);
+        super(Component.MEMORY, RAM.class);
     }
 
     /***********************************************************************************************
-     *
      * Delegate Methods
-     *
      */
 
     @Override
     public MemoryViewHolder onCreateViewHolder(LayoutInflater inflater, ViewGroup parent) {
-        return MemoryViewHolder.create(inflater, parent);
+        return new MemoryViewHolder(inflater, parent);
     }
 
     @Override
-    public void onBindViewHolder(MemoryViewHolder viewHolder, Component item, int position) {
-        viewHolder.bind(item);
+    public void onBindViewHolder(MemoryViewHolder viewHolder, RAM item, int position) {
+        viewHolder.bindData(item);
     }
 
     /***********************************************************************************************
-     *
      * ViewHolder
-     *
      */
 
-    static class MemoryViewHolder extends RecyclerView.ViewHolder{
+    static class MemoryViewHolder extends ComponentViewHolder<RAM> {
 
-        public static MemoryViewHolder create(LayoutInflater inflater, ViewGroup parent){
-            View view = inflater.inflate(R.layout.item_layout_memory, parent, false);
-            return new MemoryViewHolder(view);
-        }
+        @Bind(R.id.title)
+        TextView title;
+        @Bind(R.id.load_total)
+        TextView loadTotal;
+        @Bind(R.id.usage)
+        TextView usage;
+        @Bind(R.id.card)
+        CardView card;
 
-        public MemoryViewHolder(View itemView){
-            super(itemView);
+        public MemoryViewHolder(LayoutInflater inflater, ViewGroup parent) {
+            super(inflater, parent, R.layout.item_layout_memory);
             ButterKnife.bind(this, itemView);
         }
 
-        public void bind(Component item){
-
+        @Override
+        public int getColumnSpan() {
+            return 1;
         }
 
+        @Override
+        protected void bind(RAM item) {
+
+            title.setText(item.title);
+
+            Load load = item.getLoad();
+            if(load != null){
+                loadTotal.setText(String.format("%.1f%%", load.getValue()));
+            }
+
+            Data used = item.getUsedMemory();
+            if(used != null){
+                usage.setText(String.format("%.1f GB / %.1f GB", used.getAmount(), item.getTotalMemory()));
+            }else{
+                usage.setText(R.string.n_a);
+            }
+
+        }
     }
 }

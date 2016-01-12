@@ -2,18 +2,24 @@ package com.r0adkll.hardwired.ui;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
+import android.support.design.widget.Snackbar;
 
+import com.ftinc.kit.util.RxUtils;
 import com.ftinc.kit.widget.EmptyView;
 import com.r0adkll.hardwired.R;
+import com.r0adkll.hardwired.data.OpenHardwareMonitor;
 import com.r0adkll.hardwired.ui.adapter.ComponentRecyclerAdapter;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 
+import org.lucasr.twowayview.widget.StaggeredGridLayoutManager;
 import org.lucasr.twowayview.widget.TwoWayView;
+
+import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import timber.log.Timber;
 
 /**
  * Project: Hardwired
@@ -53,6 +59,21 @@ public class Hardwired extends RxAppCompatActivity {
         adapter.setEmptyView(emptyLayout);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
 
 
+        OpenHardwareMonitor.readTest().repeat().delay(5, TimeUnit.SECONDS)
+                .compose(RxUtils.applyIOSchedulers())
+                .compose(bindToLifecycle())
+                .subscribe(computer -> {
+                    adapter.clear();
+                    adapter.addAll(computer.components);
+                    adapter.notifyDataSetChanged();
+                }, throwable -> {
+                    Timber.e(throwable, "Something went wrong");
+                    Snackbar.make(recycler, throwable.getLocalizedMessage(), Snackbar.LENGTH_SHORT).show();
+                });
+    }
 }

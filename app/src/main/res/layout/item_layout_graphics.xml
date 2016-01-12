@@ -9,11 +9,11 @@
     <android.support.v7.widget.CardView
         android:id="@+id/card"
         android:layout_width="match_parent"
-        android:layout_height="175dp"
+        android:layout_height="@dimen/card_height"
         android:layout_margin="4dp"
 
         app:cardCornerRadius="2dp"
-        app:cardElevation="4dp"
+        app:cardElevation="@dimen/card_elevation"
         app:cardBackgroundColor="@color/green_300"
         >
 
@@ -34,7 +34,192 @@
                 android:fontFamily="sans-serif-medium"
                 />
 
+            <TextView
+                android:id="@+id/load_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:layout_centerVertical="true"
+                android:paddingLeft="16dp"
+                android:layout_marginLeft="16dp"
 
+                tools:text="23%"
+                android:textSize="48sp"
+                android:textColor="@color/white"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_toRightOf="@+id/load_total"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:id="@+id/clocks"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_toRightOf="@+id/load_total"
+                    android:gravity="center"
+                    android:padding="16dp"
+                    >
+
+                    <LinearLayout
+                        android:id="@+id/core_clock"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:gravity="start|center_vertical"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:text="@string/core"
+                            android:textColor="@color/white"
+                            android:textSize="12sp"
+                            android:fontFamily="sans-serif-medium"
+
+                            android:textAllCaps="true"
+                            />
+
+                        <TextView
+                            android:id="@+id/core_clock_speed"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+
+                            tools:text="300 Mhz"
+                            android:textColor="@color/white"
+                            android:fontFamily="monospace"
+                            />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/memory_clock"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="start|center_vertical"
+                        android:layout_below="@+id/core_clock"
+                        android:layout_marginTop="8dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:text="@string/memory"
+                            android:textColor="@color/white"
+                            android:textSize="12sp"
+                            android:fontFamily="sans-serif-medium"
+
+                            android:textAllCaps="true"
+                            />
+
+                        <TextView
+                            android:id="@+id/memory_clock_speed"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+
+                            tools:text="400 Mhz"
+                            android:textColor="@color/white"
+                            android:fontFamily="monospace"
+                            />
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:gravity="center"
+                    >
+
+                    <LinearLayout
+                        android:id="@+id/gpu_temp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:gravity="start|center_vertical"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:text="@string/temperature"
+                            android:textColor="@color/white"
+                            android:textSize="12sp"
+                            android:fontFamily="sans-serif-medium"
+
+                            android:textAllCaps="true"
+                            />
+
+                        <TextView
+                            android:id="@+id/temperature"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+
+                            tools:text="45 °C"
+                            android:textColor="@color/white"
+                            android:fontFamily="monospace"
+                            />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/fans"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_below="@+id/core_clock"
+                        android:gravity="start|center_vertical"
+                        android:layout_marginTop="8dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:text="@string/fan_speed"
+                            android:textColor="@color/white"
+                            android:textSize="12sp"
+                            android:fontFamily="sans-serif-medium"
+
+                            android:textAllCaps="true"
+                            />
+
+                        <TextView
+                            android:id="@+id/fan_speed"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+
+                            tools:text="1280 RPM"
+                            android:textColor="@color/white"
+                            android:fontFamily="monospace"
+                            />
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
 
         </RelativeLayout>
 

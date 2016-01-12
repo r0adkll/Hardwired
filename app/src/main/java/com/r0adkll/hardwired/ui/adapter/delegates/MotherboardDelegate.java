@@ -1,14 +1,17 @@
 package com.r0adkll.hardwired.ui.adapter.delegates;
 
-import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.r0adkll.hardwired.R;
 import com.r0adkll.hardwired.data.model.Component;
+import com.r0adkll.hardwired.data.model.MOBO;
 import com.r0adkll.hardwired.ui.adapter.ComponentDelegate;
+import com.r0adkll.hardwired.ui.adapter.ComponentViewHolder;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
@@ -16,7 +19,7 @@ import butterknife.ButterKnife;
  * Package: com.r0adkll.hardwired.ui.adapter
  * Created by drew.heavner on 1/11/16.
  */
-public class MotherboardDelegate extends ComponentDelegate<MotherboardDelegate.MotherboardViewHolder> {
+public class MotherboardDelegate extends ComponentDelegate<MOBO, MotherboardDelegate.MotherboardViewHolder> {
 
 
     /***********************************************************************************************
@@ -29,46 +32,47 @@ public class MotherboardDelegate extends ComponentDelegate<MotherboardDelegate.M
      * Constructor
      */
     public MotherboardDelegate() {
-        super(Component.MOTHERBOARD);
+        super(Component.MOTHERBOARD, MOBO.class);
     }
 
     /***********************************************************************************************
-     *
      * Delegate Methods
-     *
      */
 
     @Override
     public MotherboardViewHolder onCreateViewHolder(LayoutInflater inflater, ViewGroup parent) {
-        return MotherboardViewHolder.create(inflater, parent);
+        return new MotherboardViewHolder(inflater, parent);
     }
 
     @Override
-    public void onBindViewHolder(MotherboardViewHolder viewHolder, Component item, int position) {
-        viewHolder.bind(item);
+    public void onBindViewHolder(MotherboardViewHolder viewHolder, MOBO item, int position) {
+        viewHolder.bindData(item);
     }
 
     /***********************************************************************************************
-     *
      * View Holder
-     *
      */
 
-    static class MotherboardViewHolder extends RecyclerView.ViewHolder{
+    static class MotherboardViewHolder extends ComponentViewHolder<MOBO> {
 
-        public static MotherboardViewHolder create(LayoutInflater inflater, ViewGroup parent){
-            View view = inflater.inflate(R.layout.item_layout_motherboard, parent, false);
-            return new MotherboardViewHolder(view);
-        }
+        @Bind(R.id.title)
+        TextView title;
+        @Bind(R.id.card)
+        CardView card;
 
-        public MotherboardViewHolder(View itemView) {
-            super(itemView);
+        public MotherboardViewHolder(LayoutInflater inflater, ViewGroup parent) {
+            super(inflater, parent, R.layout.item_layout_motherboard);
             ButterKnife.bind(this, itemView);
         }
 
-        public void bind(Component component){
-
+        @Override
+        public int getColumnSpan() {
+            return 2;
         }
 
+        @Override
+        protected void bind(MOBO item) {
+            title.setText(item.title);
+        }
     }
 }
