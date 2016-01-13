@@ -1,7 +1,6 @@
-package com.r0adkll.hardwired.ui.adapter.delegates;
+package com.r0adkll.hardwired.ui.screens.detail.adapter.delegates;
 
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +12,8 @@ import com.r0adkll.hardwired.R;
 import com.r0adkll.hardwired.data.model.CPU;
 import com.r0adkll.hardwired.data.model.Component;
 import com.r0adkll.hardwired.data.model.Load;
-import com.r0adkll.hardwired.ui.adapter.ComponentDelegate;
-import com.r0adkll.hardwired.ui.adapter.ComponentViewHolder;
-
-import org.lucasr.twowayview.widget.SpannableGridLayoutManager;
+import com.r0adkll.hardwired.ui.screens.detail.adapter.ComponentDelegate;
+import com.r0adkll.hardwired.ui.screens.detail.adapter.ComponentViewHolder;
 
 import java.util.List;
 
@@ -25,7 +22,7 @@ import butterknife.ButterKnife;
 
 /**
  * Project: Hardwired
- * Package: com.r0adkll.hardwired.ui.adapter.delegates
+ * Package: com.r0adkll.hardwired.ui.screens.detail.adapter.delegates
  * Created by drew.heavner on 1/11/16.
  */
 public class CpuDelegate extends ComponentDelegate<CPU, CpuDelegate.CpuViewHolder> {

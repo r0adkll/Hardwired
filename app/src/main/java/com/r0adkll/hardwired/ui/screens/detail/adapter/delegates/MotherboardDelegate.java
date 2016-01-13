@@ -1,4 +1,4 @@
-package com.r0adkll.hardwired.ui.adapter.delegates;
+package com.r0adkll.hardwired.ui.screens.detail.adapter.delegates;
 
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
@@ -8,15 +8,15 @@ import android.widget.TextView;
 import com.r0adkll.hardwired.R;
 import com.r0adkll.hardwired.data.model.Component;
 import com.r0adkll.hardwired.data.model.MOBO;
-import com.r0adkll.hardwired.ui.adapter.ComponentDelegate;
-import com.r0adkll.hardwired.ui.adapter.ComponentViewHolder;
+import com.r0adkll.hardwired.ui.screens.detail.adapter.ComponentDelegate;
+import com.r0adkll.hardwired.ui.screens.detail.adapter.ComponentViewHolder;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
  * Project: Hardwired
- * Package: com.r0adkll.hardwired.ui.adapter
+ * Package: com.r0adkll.hardwired.ui.screens.detail.adapter
  * Created by drew.heavner on 1/11/16.
  */
 public class MotherboardDelegate extends ComponentDelegate<MOBO, MotherboardDelegate.MotherboardViewHolder> {

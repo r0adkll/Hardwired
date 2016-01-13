@@ -4,12 +4,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:background="?attr/colorPrimary"
+        android:elevation="@dimen/appbar_elevation"
+        />
+
     <org.lucasr.twowayview.widget.TwoWayView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/twowayview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/appbar"
 
         android:padding="4dp"
         android:clipToPadding="false"
@@ -21,8 +33,14 @@
         android:id="@+id/empty_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/appbar"
 
-        app:emptyMessage="No hardware data found"
+        android:paddingLeft="64dp"
+        android:paddingRight="64dp"
+
+        app:emptyMessage="@string/empty_message_detail"
+        app:emptyIcon="@drawable/ic_empty_detail"
+        app:emptyIconSize="100dp"
         />
 
 </RelativeLayout>

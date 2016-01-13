@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:layout_marginTop="8dp"
+        >
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="8">
+
+            <EditText
+                android:id="@+id/input_ip_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number|numberDecimal|"
+                android:digits="0123456789."
+
+                android:hint="@string/hint_ip_address"
+                tools:text="192.168.1.204"
+                />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2">
+
+            <EditText
+                android:id="@+id/input_port"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number|numberSigned"
+                android:maxLength="4"
+
+                android:hint="@string/hint_port"
+                tools:text="8085"
+                />
+
+        </android.support.design.widget.TextInputLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/error_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:padding="4dp"
+
+        android:drawableStart="@drawable/ic_warning_red_500_18dp"
+        android:drawablePadding="8dp"
+
+        tools:text="@string/placeholder_lorem_ipsum_long"
+        android:textSize="16sp"
+        android:textColor="@color/red_500"
+        android:fontFamily="sans-serif-medium"
+        android:maxLines="4"
+
+        android:visibility="gone"
+        tools:visibility="visible"
+        />
+
+    <android.support.v7.widget.ButtonBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:gravity="right|end">
+
+        <ProgressBar style="?android:attr/progressBarStyleSmall"
+            android:id="@+id/loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:layout_gravity="center_vertical"
+            />
+
+        <TextView style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:id="@+id/action_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@android:string/cancel"
+            />
+
+        <TextView style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:id="@+id/action_positive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/create"
+            android:enabled="false"
+            />
+
+    </android.support.v7.widget.ButtonBarLayout>
+
+</LinearLayout>

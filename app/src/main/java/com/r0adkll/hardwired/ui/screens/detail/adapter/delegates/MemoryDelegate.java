@@ -1,4 +1,4 @@
-package com.r0adkll.hardwired.ui.adapter.delegates;
+package com.r0adkll.hardwired.ui.screens.detail.adapter.delegates;
 
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
@@ -7,24 +7,24 @@ import android.widget.TextView;
 
 import com.r0adkll.hardwired.R;
 import com.r0adkll.hardwired.data.model.Component;
-import com.r0adkll.hardwired.data.model.HDD;
+import com.r0adkll.hardwired.data.model.Data;
 import com.r0adkll.hardwired.data.model.Load;
-import com.r0adkll.hardwired.data.model.Temperature;
-import com.r0adkll.hardwired.ui.adapter.ComponentDelegate;
-import com.r0adkll.hardwired.ui.adapter.ComponentViewHolder;
+import com.r0adkll.hardwired.data.model.RAM;
+import com.r0adkll.hardwired.ui.screens.detail.adapter.ComponentDelegate;
+import com.r0adkll.hardwired.ui.screens.detail.adapter.ComponentViewHolder;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
  * Project: Hardwired
- * Package: com.r0adkll.hardwired.ui.adapter.delegates
+ * Package: com.r0adkll.hardwired.ui.screens.detail.adapter.delegates
  * Created by drew.heavner on 1/11/16.
  */
-public class StorageDelegate extends ComponentDelegate<HDD, StorageDelegate.GraphicsViewHolder> {
+public class MemoryDelegate extends ComponentDelegate<RAM, MemoryDelegate.MemoryViewHolder> {
 
-    public StorageDelegate() {
-        super(Component.HDD | Component.SSD, HDD.class);
+    public MemoryDelegate() {
+        super(Component.MEMORY, RAM.class);
     }
 
     /***********************************************************************************************
@@ -32,12 +32,12 @@ public class StorageDelegate extends ComponentDelegate<HDD, StorageDelegate.Grap
      */
 
     @Override
-    public GraphicsViewHolder onCreateViewHolder(LayoutInflater inflater, ViewGroup parent) {
-        return new GraphicsViewHolder(inflater, parent);
+    public MemoryViewHolder onCreateViewHolder(LayoutInflater inflater, ViewGroup parent) {
+        return new MemoryViewHolder(inflater, parent);
     }
 
     @Override
-    public void onBindViewHolder(GraphicsViewHolder viewHolder, HDD item, int position) {
+    public void onBindViewHolder(MemoryViewHolder viewHolder, RAM item, int position) {
         viewHolder.bindData(item);
     }
 
@@ -45,20 +45,19 @@ public class StorageDelegate extends ComponentDelegate<HDD, StorageDelegate.Grap
      * ViewHolder
      */
 
-    static class GraphicsViewHolder extends ComponentViewHolder<HDD> {
-
+    static class MemoryViewHolder extends ComponentViewHolder<RAM> {
 
         @Bind(R.id.title)
         TextView title;
         @Bind(R.id.load_total)
         TextView loadTotal;
-        @Bind(R.id.temperature)
-        TextView temperature;
+        @Bind(R.id.usage)
+        TextView usage;
         @Bind(R.id.card)
         CardView card;
 
-        public GraphicsViewHolder(LayoutInflater inflater, ViewGroup parent) {
-            super(inflater, parent, R.layout.item_layout_storage);
+        public MemoryViewHolder(LayoutInflater inflater, ViewGroup parent) {
+            super(inflater, parent, R.layout.item_layout_memory);
             ButterKnife.bind(this, itemView);
         }
 
@@ -68,7 +67,8 @@ public class StorageDelegate extends ComponentDelegate<HDD, StorageDelegate.Grap
         }
 
         @Override
-        protected void bind(HDD item) {
+        protected void bind(RAM item) {
+
             title.setText(item.title);
 
             Load load = item.getLoad();
@@ -76,11 +76,11 @@ public class StorageDelegate extends ComponentDelegate<HDD, StorageDelegate.Grap
                 loadTotal.setText(String.format("%.1f%%", load.getValue()));
             }
 
-            Temperature temp = item.getTemperature();
-            if(temp != null){
-                temperature.setText(temp.value);
+            Data used = item.getUsedMemory();
+            if(used != null){
+                usage.setText(String.format("%.1f GB / %.1f GB", used.getAmount(), item.getTotalMemory()));
             }else{
-                temperature.setText(R.string.n_a);
+                usage.setText(R.string.n_a);
             }
 
         }

@@ -1,4 +1,4 @@
-package com.r0adkll.hardwired.ui.adapter;
+package com.r0adkll.hardwired.ui.screens.directory.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
@@ -13,7 +13,7 @@ import com.r0adkll.hardwired.data.model.Computer;
 
 /**
  * Project: Hardwired
- * Package: com.r0adkll.hardwired.ui.adapter
+ * Package: com.r0adkll.hardwired.ui.screens.detail.adapter
  * Created by drew.heavner on 1/12/16.
  */
 public class ComputerRecyclerAdapter extends BetterRecyclerAdapter<Computer, ComputerRecyclerAdapter.ComputerViewHolder> {

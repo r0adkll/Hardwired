@@ -5,4 +5,10 @@
     <string name="core">Core</string>
     <string name="fan_speed">Fan Speed</string>
     <string name="n_a">N/A</string>
+    <string name="hint_ip_address">IP Address</string>
+    <string name="hint_port">Port</string>
+    <string name="create">Create</string>
+    <string name="dialog_add_computer_title">Add computer</string>
+    <string name="empty_message_directory">No computers have been added. Click the \'+\' button to get started.</string>
+    <string name="empty_message_detail">No hardware data found for this computer. Please check your connection.</string>
 </resources>

@@ -1,17 +1,16 @@
-package com.r0adkll.hardwired.ui.adapter;
+package com.r0adkll.hardwired.ui.screens.detail.adapter;
 
-import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
 import com.ftinc.kit.adapter.BetterRecyclerAdapter;
 import com.hannesdorfmann.adapterdelegates.AdapterDelegatesManager;
 import com.r0adkll.hardwired.data.model.Component;
-import com.r0adkll.hardwired.ui.adapter.delegates.CpuDelegate;
-import com.r0adkll.hardwired.ui.adapter.delegates.GraphicsDelegate;
-import com.r0adkll.hardwired.ui.adapter.delegates.MemoryDelegate;
-import com.r0adkll.hardwired.ui.adapter.delegates.MotherboardDelegate;
-import com.r0adkll.hardwired.ui.adapter.delegates.StorageDelegate;
+import com.r0adkll.hardwired.ui.screens.detail.adapter.delegates.CpuDelegate;
+import com.r0adkll.hardwired.ui.screens.detail.adapter.delegates.GraphicsDelegate;
+import com.r0adkll.hardwired.ui.screens.detail.adapter.delegates.MemoryDelegate;
+import com.r0adkll.hardwired.ui.screens.detail.adapter.delegates.MotherboardDelegate;
+import com.r0adkll.hardwired.ui.screens.detail.adapter.delegates.StorageDelegate;
 
 import java.util.List;
 

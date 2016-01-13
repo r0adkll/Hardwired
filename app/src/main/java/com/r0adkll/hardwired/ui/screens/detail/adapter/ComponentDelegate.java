@@ -1,10 +1,8 @@
-package com.r0adkll.hardwired.ui.adapter;
+package com.r0adkll.hardwired.ui.screens.detail.adapter;
 
-import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.hannesdorfmann.adapterdelegates.AdapterDelegate;
@@ -15,7 +13,7 @@ import java.util.List;
 
 /**
  * Project: Hardwired
- * Package: com.r0adkll.hardwired.ui.adapter
+ * Package: com.r0adkll.hardwired.ui.screens.detail.adapter
  * Created by drew.heavner on 1/11/16.
  */
 public abstract class ComponentDelegate<T extends Component, VH extends ComponentViewHolder<T>> implements AdapterDelegate<List<Component>> {

@@ -1,4 +1,4 @@
-package com.r0adkll.hardwired.ui.adapter.delegates;
+package com.r0adkll.hardwired.ui.screens.detail.adapter.delegates;
 
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
@@ -12,15 +12,15 @@ import com.r0adkll.hardwired.data.model.Fan;
 import com.r0adkll.hardwired.data.model.GPU;
 import com.r0adkll.hardwired.data.model.Load;
 import com.r0adkll.hardwired.data.model.Temperature;
-import com.r0adkll.hardwired.ui.adapter.ComponentDelegate;
-import com.r0adkll.hardwired.ui.adapter.ComponentViewHolder;
+import com.r0adkll.hardwired.ui.screens.detail.adapter.ComponentDelegate;
+import com.r0adkll.hardwired.ui.screens.detail.adapter.ComponentViewHolder;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
  * Project: Hardwired
- * Package: com.r0adkll.hardwired.ui.adapter.delegates
+ * Package: com.r0adkll.hardwired.ui.screens.detail.adapter.delegates
  * Created by drew.heavner on 1/11/16.
  */
 public class GraphicsDelegate extends ComponentDelegate<GPU, GraphicsDelegate.GraphicsViewHolder> {

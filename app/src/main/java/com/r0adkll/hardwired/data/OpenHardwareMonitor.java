@@ -6,8 +6,12 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import com.r0adkll.hardwired.data.model.Component;
+import com.r0adkll.hardwired.data.model.Computer;
 
 import java.io.IOException;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -23,21 +27,81 @@ import rx.Subscriber;
  * Package: com.r0adkll.hardwired.data
  * Created by drew.heavner on 1/11/16.
  */
+@Singleton
 public class OpenHardwareMonitor {
 
-    private static OkHttpClient _client;
-    private static Gson _gson;
+    private OkHttpClient client;
+    private Gson gson;
 
-    private static OkHttpClient getOkHttp(){
-        if(_client == null) _client = new OkHttpClient.Builder()
-                .build();
-        return _client;
+    @Inject
+    public OpenHardwareMonitor(OkHttpClient client, Gson gson){
+        this.client = client;
+        this.gson = gson;
     }
 
-    private static Gson getGson(){
-        if(_gson == null) _gson = new GsonBuilder()
-                .create();
-        return _gson;
+    /**
+     * Test a provided IP Address and Port to see if there is a running instance of
+     * Open Hardware Monitor running and return the resulting computer object to save and store
+     * for later reference
+     *
+     * @param ipAddress     the address of the OHM Server to connect to
+     * @param port          the port that the OHM Server is running on
+     * @return              the Computer object to save for reconnection later
+     */
+    public Observable<Computer> test(String ipAddress, int port){
+        return Observable.create(new Observable.OnSubscribe<Computer>() {
+            @Override
+            public void call(Subscriber<? super Computer> subscriber) {
+                Request request = new Request.Builder()
+                        .get()
+                        .url(String.format("https://%s:%04d/data.json", ipAddress, port))
+                        .build();
+
+                try {
+                    Response response = client.newCall(request).execute();
+                    if(response.isSuccessful()) {
+
+                        // Parse Response
+                        String responseBody = response.body().string();
+                        Component computer = parseResponse(responseBody);
+                        if(computer != null){
+
+                            // Construct Computer object from gathered info
+                            Computer c = new Computer.Builder()
+                                    .name(computer.title)
+                                    .ip(ipAddress)
+                                    .port(port)
+                                    .build();
+
+                            // Now, if possible, pump through subscriber
+                            if (!subscriber.isUnsubscribed()) {
+                                subscriber.onNext(c);
+                                subscriber.onCompleted();
+                            }
+                        } else {
+                            if (!subscriber.isUnsubscribed()) {
+                                subscriber.onError(new Resources.NotFoundException("No computer was found"));
+                                subscriber.onCompleted();
+                            }
+                        }
+
+                    }else{
+                        if(!subscriber.isUnsubscribed()){
+                            subscriber.onError(new Exception(String.format("[%d] %s", response.code(), response.message())));
+                            subscriber.onCompleted();
+                        }
+                    }
+
+                } catch (IOException | JsonSyntaxException e) {
+                    if(!subscriber.isUnsubscribed()){
+                        subscriber.onError(e);
+                        subscriber.onCompleted();
+                    }
+                }
+
+
+            }
+        });
     }
 
     /**
@@ -47,11 +111,10 @@ public class OpenHardwareMonitor {
      * @param baseUri       the base url + port that the OHM is running on
      * @return              the observable to listen to
      */
-    public static Observable<Component> read(final String baseUri){
+    public Observable<Component> read(final String baseUri){
         return Observable.create(new Observable.OnSubscribe<Component>() {
             @Override
             public void call(Subscriber<? super Component> subscriber) {
-                OkHttpClient client = getOkHttp();
                 Request request = new Request.Builder()
                         .get()
                         .url(getUrl(baseUri))
@@ -95,7 +158,7 @@ public class OpenHardwareMonitor {
         });
     }
 
-    public static Observable<Component> readTest(){
+    public Observable<Component> readTest(){
         return Observable.create(new Observable.OnSubscribe<Component>() {
             @Override
             public void call(Subscriber<? super Component> subscriber) {
@@ -116,9 +179,9 @@ public class OpenHardwareMonitor {
         });
     }
 
-    private static Component parseResponse(String responseBody){
+    private Component parseResponse(String responseBody){
         // Deserialize into object
-        Component component = getGson().fromJson(responseBody, Component.class);
+        Component component = gson.fromJson(responseBody, Component.class);
 
         if (component.components != null && !component.components.isEmpty()) {
             return component.components.get(0);
