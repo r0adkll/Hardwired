@@ -78,7 +78,7 @@ public class RAMTest {
         mockRam.components = Arrays.asList(loadContainerMock);
 
         // Validate method
-        Data data = mockRam.getUsedMemory();
+        Data data = mockRam.getAvailableMemory();
         assertNotNull(data);
     }
 
