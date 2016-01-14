@@ -105,7 +105,7 @@ public class DirectoryActivity extends BaseActivity implements DirectoryView,
      * the needed view elements
      */
     private void init(){
-        adapter = new ComputerRecyclerAdapter();
+        adapter = new ComputerRecyclerAdapter(this);
         adapter.setEmptyView(emptyView);
         adapter.setOnItemClickListener(this);
 

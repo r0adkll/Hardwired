@@ -25,8 +25,7 @@
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
-                android:paddingTop="8dp"
+                android:padding="16dp"
 
                 tools:text="GPU"
                 android:textSize="20sp"
@@ -34,186 +33,194 @@
                 android:fontFamily="sans-serif-medium"
                 />
 
-            <TextView
-                android:id="@+id/load_total"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:layout_centerVertical="true"
-                android:paddingLeft="16dp"
-                android:layout_marginLeft="16dp"
-
-                tools:text="23%"
-                android:textSize="48sp"
-                android:textColor="@color/white"
-                />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:layout_toRightOf="@+id/load_total"
-                android:padding="16dp">
+                >
 
-                <LinearLayout
-                    android:id="@+id/clocks"
+                <TextView
+                    android:id="@+id/load_total"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:orientation="vertical"
+                    android:gravity="center"
+
+                    tools:text="23%"
+                    android:textSize="48sp"
+                    android:textColor="@color/white"
+                    />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
                     android:layout_toRightOf="@+id/load_total"
-                    android:gravity="center"
-                    android:padding="16dp"
+                    android:paddingRight="16dp"
+                    android:paddingTop="36dp"
+                    android:paddingBottom="16dp"
                     >
 
                     <LinearLayout
-                        android:id="@+id/core_clock"
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:gravity="start|center_vertical"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-
-                            android:text="@string/core"
-                            android:textColor="@color/white"
-                            android:textSize="12sp"
-                            android:fontFamily="sans-serif-medium"
-
-                            android:textAllCaps="true"
-                            />
-
-                        <TextView
-                            android:id="@+id/core_clock_speed"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-
-                            tools:text="300 Mhz"
-                            android:textColor="@color/white"
-                            android:fontFamily="monospace"
-                            />
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/memory_clock"
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
+                        android:id="@+id/clocks"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:orientation="vertical"
-                        android:gravity="start|center_vertical"
-                        android:layout_below="@+id/core_clock"
-                        android:layout_marginTop="8dp">
+                        android:layout_toRightOf="@+id/load_total"
+                        android:gravity="center"
+                        >
 
-                        <TextView
+                        <LinearLayout
+                            android:id="@+id/core_clock"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="start|center_vertical"
+                            android:orientation="vertical">
 
-                            android:text="@string/memory"
-                            android:textColor="@color/white"
-                            android:textSize="12sp"
-                            android:fontFamily="sans-serif-medium"
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
 
-                            android:textAllCaps="true"
-                            />
+                                android:text="@string/core"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                android:fontFamily="sans-serif-medium"
 
-                        <TextView
-                            android:id="@+id/memory_clock_speed"
+                                android:textAllCaps="true"
+                                />
+
+                            <TextView
+                                android:id="@+id/core_clock_speed"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+
+                                tools:text="300 Mhz"
+                                android:textColor="@color/white"
+                                android:fontFamily="monospace"
+                                />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/memory_clock"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:gravity="start|center_vertical"
+                            android:layout_below="@+id/core_clock"
+                            android:layout_marginTop="8dp">
 
-                            tools:text="400 Mhz"
-                            android:textColor="@color/white"
-                            android:fontFamily="monospace"
-                            />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
 
+                                android:text="@string/memory"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                android:fontFamily="sans-serif-medium"
+
+                                android:textAllCaps="true"
+                                />
+
+                            <TextView
+                                android:id="@+id/memory_clock_speed"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+
+                                tools:text="400 Mhz"
+                                android:textColor="@color/white"
+                                android:fontFamily="monospace"
+                                />
+
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:padding="16dp"
-                    android:gravity="center"
-                    >
-
                     <LinearLayout
-                        android:id="@+id/gpu_temp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:gravity="start|center_vertical"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-
-                            android:text="@string/temperature"
-                            android:textColor="@color/white"
-                            android:textSize="12sp"
-                            android:fontFamily="sans-serif-medium"
-
-                            android:textAllCaps="true"
-                            />
-
-                        <TextView
-                            android:id="@+id/temperature"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-
-                            tools:text="45 °C"
-                            android:textColor="@color/white"
-                            android:fontFamily="monospace"
-                            />
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/fans"
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:orientation="vertical"
-                        android:layout_below="@+id/core_clock"
-                        android:gravity="start|center_vertical"
-                        android:layout_marginTop="8dp">
+                        android:gravity="center"
+                        >
 
-                        <TextView
+                        <LinearLayout
+                            android:id="@+id/gpu_temp"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="start|center_vertical"
+                            android:orientation="vertical">
 
-                            android:text="@string/fan_speed"
-                            android:textColor="@color/white"
-                            android:textSize="12sp"
-                            android:fontFamily="sans-serif-medium"
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
 
-                            android:textAllCaps="true"
-                            />
+                                android:text="@string/temperature"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                android:fontFamily="sans-serif-medium"
 
-                        <TextView
-                            android:id="@+id/fan_speed"
+                                android:textAllCaps="true"
+                                />
+
+                            <TextView
+                                android:id="@+id/temperature"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+
+                                tools:text="45 °C"
+                                android:textColor="@color/white"
+                                android:fontFamily="monospace"
+                                />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/fans"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:layout_below="@+id/core_clock"
+                            android:gravity="start|center_vertical"
+                            android:layout_marginTop="8dp">
 
-                            tools:text="1280 RPM"
-                            android:textColor="@color/white"
-                            android:fontFamily="monospace"
-                            />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
 
+                                android:text="@string/fan_speed"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                android:fontFamily="sans-serif-medium"
+
+                                android:textAllCaps="true"
+                                />
+
+                            <TextView
+                                android:id="@+id/fan_speed"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+
+                                tools:text="1280 RPM"
+                                android:textColor="@color/white"
+                                android:fontFamily="monospace"
+                                />
+
+
+                        </LinearLayout>
 
                     </LinearLayout>
 

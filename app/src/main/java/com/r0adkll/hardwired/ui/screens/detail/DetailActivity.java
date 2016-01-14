@@ -10,6 +10,7 @@ import android.support.v7.widget.SimpleItemAnimator;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.f2prateek.rx.preferences.Preference;
 import com.ftinc.kit.util.RxUtils;
 import com.ftinc.kit.widget.EmptyView;
 import com.r0adkll.hardwired.AppComponent;
@@ -18,6 +19,7 @@ import com.r0adkll.hardwired.data.model.Component;
 import com.r0adkll.hardwired.data.model.Computer;
 import com.r0adkll.hardwired.ui.model.BaseActivity;
 import com.r0adkll.hardwired.ui.screens.detail.adapter.ComponentRecyclerAdapter;
+import com.r0adkll.hardwired.util.qualifiers.RefreshInterval;
 
 import org.lucasr.twowayview.widget.TwoWayView;
 
@@ -72,6 +74,9 @@ public class DetailActivity extends BaseActivity implements DetailView {
     @Inject
     DetailPresenter presenter;
 
+    @Inject @RefreshInterval
+    Preference<Long> refreshIntervalPreference;
+
     private ComponentRecyclerAdapter adapter;
 
     /***********************************************************************************************
@@ -100,7 +105,32 @@ public class DetailActivity extends BaseActivity implements DetailView {
     }
 
     @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+
+        long interval = refreshIntervalPreference.get();
+        switch ((int) interval){
+            case 1:
+                menu.findItem(R.id.refresh_1sec).setChecked(true);
+                break;
+            case 2:
+                menu.findItem(R.id.refresh_2sec).setChecked(true);
+                break;
+            case 3:
+                menu.findItem(R.id.refresh_3sec).setChecked(true);
+                break;
+            case 4:
+                menu.findItem(R.id.refresh_4sec).setChecked(true);
+                break;
+            case 5:
+                menu.findItem(R.id.refresh_5sec).setChecked(true);
+        }
+
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        item.setChecked(true);
         switch (item.getItemId()){
             case R.id.refresh_1sec:
                 presenter.updateRefreshInterval(1);
@@ -128,6 +158,12 @@ public class DetailActivity extends BaseActivity implements DetailView {
      */
 
     private void init(){
+        getSupportActionBar().setTitle(computer.name);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getAppBar().setNavigationOnClickListener(v -> {
+            supportFinishAfterTransition();
+        });
+
         GridLayoutManager layoutManager = new GridLayoutManager(this, getResources().getInteger(R.integer.grid_columns));
         layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override

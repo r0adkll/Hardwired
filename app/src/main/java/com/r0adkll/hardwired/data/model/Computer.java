@@ -60,6 +60,30 @@ public class Computer extends Model implements Parcelable{
         }
     };
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        Computer computer = (Computer) o;
+
+        if (ipAddress != null ? !ipAddress.equals(computer.ipAddress) : computer.ipAddress != null)
+            return false;
+        if (port != null ? !port.equals(computer.port) : computer.port != null) return false;
+        return name != null ? name.equals(computer.name) : computer.name == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (ipAddress != null ? ipAddress.hashCode() : 0);
+        result = 31 * result + (port != null ? port.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
+    }
+
     public static class Builder{
 
         private Computer computer;

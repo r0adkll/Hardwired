@@ -41,7 +41,7 @@ public class DetailPresenterImpl implements DetailPresenter {
     @Override
     public void connect(Computer computer) {
         view.bindObservable(monitor.read(computer.getBaseUri()))
-                .repeatWhen(observable -> Observable.timer(1, TimeUnit.SECONDS).repeat())
+                .repeatWhen(observable -> timer().repeat())
                 .compose(RxUtils.applyIOSchedulers())
                 .subscribe(component -> {
                     Timber.d("Updating Computer[%s]", computer.name);
@@ -54,6 +54,15 @@ public class DetailPresenterImpl implements DetailPresenter {
     @Override
     public void updateRefreshInterval(long seconds) {
         refreshIntervalPreference.set(seconds);
+    }
+
+    private Observable<Long> timer(){
+        return Observable.defer(new Func0<Observable<Long>>() {
+            @Override
+            public Observable<Long> call() {
+                return Observable.timer(refreshIntervalPreference.get(), TimeUnit.SECONDS);
+            }
+        });
     }
 
 }
