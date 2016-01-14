@@ -46,7 +46,7 @@ public class Data extends Component {
 
     private float convertAmount(String value){
         String raw = value.replace("GB", "").trim();
-        return Utils.parseFloat(raw, 0f);
+        return Utils.parseFloat(raw, -1f);
     }
 
 }

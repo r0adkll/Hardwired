@@ -11,62 +11,60 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
  * Project: Hardwired
  * Package: com.r0adkll.hardwired.data.model
- * Created by drew.heavner on 1/13/16.
+ * Created by drew.heavner on 1/14/16.
  */
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.KITKAT)
-public class LoadTest {
+public class ClockTest {
 
-    Load mockLoad;
+    Clock mockClock;
 
     @Before
     public void setUp() throws Exception {
-        mockLoad = new Load();
-        mockLoad.value = generateRandomPercentValue();
-        mockLoad.min = generateRandomPercentValue();
-        mockLoad.max = generateRandomPercentValue();
+        mockClock = new Clock();
+        mockClock.value = generateRandomClockValue();
+        mockClock.min = generateRandomClockValue();
+        mockClock.max = generateRandomClockValue();
     }
 
     @Test
-    public void testGetValue() throws Exception {
-        assertTrue(mockLoad.getValue() != -1);
+    public void testGetSpeedMhz() throws Exception {
+        assertTrue(mockClock.getSpeedMhz() != -1);
     }
 
     @Test
-    public void testGetMin() throws Exception {
-        assertTrue(mockLoad.getMin() != -1);
+    public void testGetMinSpeedMhz() throws Exception {
+        assertTrue(mockClock.getMinSpeedMhz() != -1);
     }
 
     @Test
-    public void testGetMax() throws Exception {
-        assertTrue(mockLoad.getMin() != -1);
+    public void testGetMaxSpeedMhz() throws Exception {
+        assertTrue(mockClock.getMaxSpeedMhz() != -1);
     }
 
     @Test
     public void testGetLabel() throws Exception {
-        Load testMock1 = mock(Load.class);
+        Clock testMock1 = mock(Clock.class);
         when(testMock1.getLabel()).thenCallRealMethod();
-
         testMock1.title = "GPU Core";
 
         assertEquals(testMock1.getLabel(), "Core");
 
-        Load testMock2 = mock(Load.class);
+        Clock testMock2 = mock(Clock.class);
         when(testMock2.getLabel()).thenCallRealMethod();
-        testMock2.title = "CPU Core #1";
+        testMock2.title = "CPU Memory";
 
-        assertEquals(testMock2.getLabel(), "Core #1");
+        assertEquals(testMock2.getLabel(), "Memory");
     }
 
-    private static String generateRandomPercentValue(){
-        return String.format("%.1f%%", Utils.getRandom().nextFloat() * 100);
+    private static String generateRandomClockValue(){
+        return String.format("%d MHz", Utils.getRandom().nextInt(5000));
     }
 }

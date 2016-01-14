@@ -29,7 +29,7 @@ public class Clock extends Component {
 
     private int convertSpeed(String value){
         String raw = value.toLowerCase().replace("mhz", "").trim();
-        return Utils.parseInt(raw, 0);
+        return Utils.parseInt(raw, -1);
     }
 
 }

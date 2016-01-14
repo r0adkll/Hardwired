@@ -33,7 +33,7 @@ public class Computer extends Model implements Parcelable{
     }
 
     public String getBaseUri(){
-        return String.format("http://%s:%04d", ipAddress, port);
+        return String.format("http://%s:%d", ipAddress, port);
     }
 
     @Override

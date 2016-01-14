@@ -24,7 +24,7 @@ public class Fan extends Component {
     private int convertSpeed(String value){
         String raw = value.replace("RPM", "")
                 .trim();
-        return Utils.parseInt(raw, 0);
+        return Utils.parseInt(raw, -1);
     }
 
 }
