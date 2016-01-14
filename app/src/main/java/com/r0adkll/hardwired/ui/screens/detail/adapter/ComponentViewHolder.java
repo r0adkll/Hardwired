@@ -1,6 +1,7 @@
 package com.r0adkll.hardwired.ui.screens.detail.adapter;
 
 import android.support.annotation.LayoutRes;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -22,11 +23,6 @@ public abstract class ComponentViewHolder<T extends Component> extends RecyclerV
     protected abstract void bind(T item);
 
     public void bindData(T item){
-        StaggeredGridLayoutManager.LayoutParams params =
-                (StaggeredGridLayoutManager.LayoutParams) itemView.getLayoutParams();
-        params.span = getColumnSpan();
-        itemView.setLayoutParams(params);
-
         bind(item);
     }
 }

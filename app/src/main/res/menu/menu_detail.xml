@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <item android:id="@+id/action_refresh_interval"
+          android:title="Refresh Interval"
+          android:icon="@drawable/ic_refresh_white_24dp"
+          app:showAsAction="always">
+
+        <menu>
+
+            <group android:id="@+id/refresh_interval_group"
+                   android:checkableBehavior="single">
+
+                <item android:id="@+id/refresh_1sec"
+                      android:title="1 Second" />
+
+                <item android:id="@+id/refresh_2sec"
+                      android:title="2 Seconds" />
+
+                <item android:id="@+id/refresh_3sec"
+                      android:title="3 Seconds" />
+
+                <item android:id="@+id/refresh_4sec"
+                      android:title="4 Seconds" />
+
+                <item android:id="@+id/refresh_5sec"
+                      android:title="5 Seconds" />s
+
+            </group>
+
+        </menu>
+
+    </item>
+
+</menu>

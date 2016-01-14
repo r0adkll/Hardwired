@@ -15,19 +15,16 @@
         android:elevation="@dimen/appbar_elevation"
         />
 
-    <org.lucasr.twowayview.widget.TwoWayView
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.v7.widget.RecyclerView
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/twowayview"
+        android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/appbar"
 
         android:padding="4dp"
         android:clipToPadding="false"
-
-        app:twowayview_layoutManager="StaggeredGridLayoutManager"
-        app:twowayview_numColumns="@integer/grid_columns"/>
+        />
 
     <com.ftinc.kit.widget.EmptyView
         android:id="@+id/empty_layout"

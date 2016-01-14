@@ -31,8 +31,6 @@ public class LoadTest {
         mockLoad.value = generateRandomPercentValue();
         mockLoad.min = generateRandomPercentValue();
         mockLoad.max = generateRandomPercentValue();
-
-
     }
 
     @Test

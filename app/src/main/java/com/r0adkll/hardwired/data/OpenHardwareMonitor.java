@@ -54,7 +54,7 @@ public class OpenHardwareMonitor {
             public void call(Subscriber<? super Computer> subscriber) {
                 Request request = new Request.Builder()
                         .get()
-                        .url(String.format("https://%s:%04d/data.json", ipAddress, port))
+                        .url(String.format("http://%s:%04d/data.json", ipAddress, port))
                         .build();
 
                 try {

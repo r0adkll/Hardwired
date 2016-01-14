@@ -5,4 +5,6 @@ import com.r0adkll.hardwired.data.model.Computer;
 public interface DetailPresenter {
 
     void connect(Computer computer);
+
+    void updateRefreshInterval(long seconds);
 }

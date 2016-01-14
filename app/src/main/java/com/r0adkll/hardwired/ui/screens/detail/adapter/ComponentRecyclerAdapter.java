@@ -41,6 +41,7 @@ public class ComponentRecyclerAdapter extends BetterRecyclerAdapter<Component, R
         delegatesManager.addDelegate(new MemoryDelegate());
         delegatesManager.addDelegate(new GraphicsDelegate());
         delegatesManager.addDelegate(new StorageDelegate());
+
     }
 
     /***********************************************************************************************
@@ -64,4 +65,10 @@ public class ComponentRecyclerAdapter extends BetterRecyclerAdapter<Component, R
         delegatesManager.onBindViewHolder(getItems(), i, viewHolder);
     }
 
+    @Override
+    public long getItemId(int position) {
+        Component item = getItem(position);
+        if(item != null) return item.id;
+        return super.getItemId(position);
+    }
 }

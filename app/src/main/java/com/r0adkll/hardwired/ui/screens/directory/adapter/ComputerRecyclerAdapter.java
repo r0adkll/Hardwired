@@ -26,6 +26,8 @@ public class ComputerRecyclerAdapter extends BetterRecyclerAdapter<Computer, Com
         int padding = Utils.dipToPx(parent.getContext(), 16);
         textView.setPadding(padding, padding, padding, padding);
         textView.setMinHeight(Utils.dipToPx(parent.getContext(), 56));
+        textView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        textView.setBackground(UIUtils.getSelectableItemBackground(parent.getContext()));
         return new ComputerViewHolder(textView);
     }
 

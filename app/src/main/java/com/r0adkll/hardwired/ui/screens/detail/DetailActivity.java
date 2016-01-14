@@ -4,8 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SimpleItemAnimator;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.ftinc.kit.util.RxUtils;
 import com.ftinc.kit.widget.EmptyView;
@@ -56,8 +59,8 @@ public class DetailActivity extends BaseActivity implements DetailView {
      *
      */
 
-    @Bind(R.id.twowayview)
-    TwoWayView recycler;
+    @Bind(R.id.recycler)
+    RecyclerView recycler;
 
     @Bind(R.id.empty_layout)
     EmptyView emptyLayout;
@@ -90,6 +93,34 @@ public class DetailActivity extends BaseActivity implements DetailView {
         presenter.connect(computer);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_detail, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.refresh_1sec:
+                presenter.updateRefreshInterval(1);
+                return true;
+            case R.id.refresh_2sec:
+                presenter.updateRefreshInterval(2);
+                return true;
+            case R.id.refresh_3sec:
+                presenter.updateRefreshInterval(3);
+                return true;
+            case R.id.refresh_4sec:
+                presenter.updateRefreshInterval(4);
+                return true;
+            case R.id.refresh_5sec:
+                presenter.updateRefreshInterval(5);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     /***********************************************************************************************
      *
      * Helper Methods
@@ -97,9 +128,30 @@ public class DetailActivity extends BaseActivity implements DetailView {
      */
 
     private void init(){
+        GridLayoutManager layoutManager = new GridLayoutManager(this, getResources().getInteger(R.integer.grid_columns));
+        layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                Component cmp = adapter.getItem(position);
+                switch (cmp.getType()){
+                    case Component.MOTHERBOARD:
+                    case Component.CPU:
+                    case Component.GRAPHICS:
+                        return 2;
+                    case Component.HDD:
+                    case Component.SSD:
+                    case Component.MEMORY:
+                        return 1;
+                }
+                return 1;
+            }
+        });
+
         adapter = new ComponentRecyclerAdapter();
-        recycler.setAdapter(adapter);
         adapter.setEmptyView(emptyLayout);
+
+        recycler.setAdapter(adapter);
+        recycler.setLayoutManager(layoutManager);
 
         RecyclerView.ItemAnimator animator = recycler.getItemAnimator();
         if (animator instanceof SimpleItemAnimator) {

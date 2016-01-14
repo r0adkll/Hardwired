@@ -1,6 +1,8 @@
 package com.r0adkll.hardwired.ui.screens.detail;
 
+import com.f2prateek.rx.preferences.Preference;
 import com.r0adkll.hardwired.data.OpenHardwareMonitor;
+import com.r0adkll.hardwired.util.qualifiers.RefreshInterval;
 
 import dagger.Module;
 import dagger.Provides;
@@ -20,8 +22,10 @@ public class DetailModule {
     }
 
     @Provides
-    DetailPresenter providePresenter(DetailView v, OpenHardwareMonitor monitor){
-        return new DetailPresenterImpl(v, monitor);
+    DetailPresenter providePresenter(DetailView v,
+                                     @RefreshInterval Preference<Long> refreshInterval,
+                                     OpenHardwareMonitor monitor){
+        return new DetailPresenterImpl(v, refreshInterval, monitor);
     }
 
 }

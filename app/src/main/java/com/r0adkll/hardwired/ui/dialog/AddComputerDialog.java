@@ -164,6 +164,7 @@ public class AddComputerDialog extends RxDialogFragment {
                         .doOnNext(computer -> computer.save())
                         .compose(bindToLifecycle())
                         .compose(RxUtils.applyIOSchedulers())
+                        .compose(RxUtils.applyLogging("Monitor"))
                         .subscribe(computer -> {
                             mSubject.onNext(computer);
                             mSubject.onCompleted();
