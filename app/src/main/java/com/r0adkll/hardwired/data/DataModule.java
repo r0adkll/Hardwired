@@ -26,12 +26,6 @@ public class DataModule {
     public static final String PREF_REFRESH_INTERVAL = "pref_refresh_interval";
 
     @Provides @Singleton
-    OkHttpClient provideOkHttpClient(){
-        return new OkHttpClient.Builder()
-                .build();
-    }
-
-    @Provides @Singleton
     Gson provideGson(){
         return new Gson();
     }

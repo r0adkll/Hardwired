@@ -54,6 +54,8 @@ public class HardwiredApp extends Application {
         component = DaggerAppComponent.builder()
                 .appModule(new AppModule(this))
                 .dataModule(new DataModule())
+                .infoModule(new InfoModule())
+                .flavorModule(new FlavorModule())
                 .build();
         component.inject(this);
     }

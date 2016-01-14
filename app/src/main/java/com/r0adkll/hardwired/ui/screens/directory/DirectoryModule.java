@@ -1,7 +1,5 @@
 package com.r0adkll.hardwired.ui.screens.directory;
 
-import com.r0adkll.hardwired.ui.screens.directory.adapter.DirectoryView;
-
 import dagger.Module;
 import dagger.Provides;
 

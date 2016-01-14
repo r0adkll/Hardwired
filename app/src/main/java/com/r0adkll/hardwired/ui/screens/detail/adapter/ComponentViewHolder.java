@@ -8,8 +8,6 @@ import android.view.ViewGroup;
 
 import com.r0adkll.hardwired.data.model.Component;
 
-import org.lucasr.twowayview.widget.StaggeredGridLayoutManager;
-
 public abstract class ComponentViewHolder<T extends Component> extends RecyclerView.ViewHolder {
 
     protected LayoutInflater inflater;

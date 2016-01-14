@@ -2,12 +2,8 @@ package com.r0adkll.hardwired.ui.screens.directory;
 
 import com.ftinc.kit.util.RxUtils;
 import com.r0adkll.hardwired.data.model.Computer;
-import com.r0adkll.hardwired.ui.screens.directory.adapter.DirectoryView;
-
-import java.util.List;
 
 import ollie.query.Select;
-import rx.functions.Action1;
 
 /**
  * Project: Hardwired

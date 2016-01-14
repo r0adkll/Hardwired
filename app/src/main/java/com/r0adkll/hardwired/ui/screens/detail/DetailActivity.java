@@ -1,7 +1,11 @@
 package com.r0adkll.hardwired.ui.screens.detail;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.GridLayoutManager;
@@ -20,8 +24,6 @@ import com.r0adkll.hardwired.data.model.Computer;
 import com.r0adkll.hardwired.ui.model.BaseActivity;
 import com.r0adkll.hardwired.ui.screens.detail.adapter.ComponentRecyclerAdapter;
 import com.r0adkll.hardwired.util.qualifiers.RefreshInterval;
-
-import org.lucasr.twowayview.widget.TwoWayView;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;

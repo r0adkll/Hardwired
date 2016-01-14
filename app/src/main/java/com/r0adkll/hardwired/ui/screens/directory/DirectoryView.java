@@ -1,4 +1,4 @@
-package com.r0adkll.hardwired.ui.screens.directory.adapter;
+package com.r0adkll.hardwired.ui.screens.directory;
 
 import com.r0adkll.hardwired.data.model.Computer;
 import com.r0adkll.hardwired.ui.model.IRxView;

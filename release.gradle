@@ -1,0 +1,193 @@
+/*
+ * Copyright © 52inc 2015.
+ * All rights reserved.
+ */
+
+apply plugin: 'org.ajoberstar.grgit'
+
+import groovy.json.*
+
+def versionFile = file("../version.json")
+def versionJSON = getJSON(versionFile)
+def versionCode = versionJSON.buildNumber
+def versionName = "${versionJSON.major}.${versionJSON.minor}.${versionJSON.revision}"
+
+// Expose as extra properties at project level
+ext.versionCode = versionCode
+ext.versionName = versionName
+
+/***********************************************************************************************
+ * 
+ * Methods
+ * 
+ */
+
+def getJSON(file) {
+    return new JsonSlurper().parseText(file.text)
+}
+
+/***********************************************************************************************
+ * 
+ * Tasks
+ * 
+ */
+
+task prepareAlphaRelease << {
+
+    // Ensure our working copy is clean first
+    if (!grgit.status().isClean()) {
+        throw new GradleException("You must NOT have any changes in your working copy!")
+    }
+
+    // Update version code
+    versionJSON.buildNumber += 1
+    versionCode = versionJSON.buildNumber
+    versionFile.write(new JsonBuilder(versionJSON).toPrettyString())
+
+    // Apply version code to all variants. This is necessary
+    // so when we build the APK, it gets the updated values
+    android.applicationVariants.all { variant ->
+        variant.mergedFlavor.versionCode = versionCode
+        variant.mergedFlavor.versionName = "alpha-v${versionName}.${versionCode}"
+    }
+
+    // Add changes
+    def changes = grgit.status().unstaged.getAllChanges()
+    grgit.add(update: true, patterns: changes)
+
+    // Commit
+    grgit.commit(message: "Prepare for Alpha release [ci skip]")
+
+    // Push
+    grgit.push()
+
+    // Tag
+    def tagName = "alpha-v${versionName}.${versionCode}"
+    grgit.tag.add(name: tagName, message: "Alpha Release ${tagName}")
+
+    // Push
+    grgit.push(refsOrSpecs: [tagName])
+}
+
+task prepareBetaRelease << {
+
+    // Ensure our working copy is clean first
+    if (!grgit.status().isClean()) {
+        throw new GradleException("You must NOT have any changes in your working copy!")
+    }
+
+    // Update version code
+    versionJSON.buildNumber += 1
+    versionCode = versionJSON.buildNumber
+    versionFile.write(new JsonBuilder(versionJSON).toPrettyString())
+
+    // Apply version code to all variants. This is necessary
+    // so when we build the APK, it gets the updated values
+    android.applicationVariants.all { variant ->
+        variant.mergedFlavor.versionCode = versionCode
+        variant.mergedFlavor.versionName = "beta-v${versionName}.${versionCode}"
+    }
+
+    // Add changes
+    def changes = grgit.status().unstaged.getAllChanges()
+    grgit.add(update: true, patterns: changes)
+
+    // Commit
+    grgit.commit(message: "Prepare for Beta release [ci skip]")
+
+    // Push
+    grgit.push()
+
+    // Tag
+    def tagName = "beta-v${versionName}.${versionCode}"
+    grgit.tag.add(name: tagName, message: "Beta Release ${tagName}")
+
+    // Push
+    grgit.push(refsOrSpecs: [tagName])
+}
+
+task preparePlayStoreRelease << {
+
+    // Ensure our working copy is clean first
+    if (!grgit.status().isClean()) {
+        throw new GradleException("You must NOT have any changes in your working copy!")
+    }
+
+    // Update version code
+    versionJSON.buildNumber += 1
+    versionJSON.revision += 1
+    versionCode = versionJSON.buildNumber
+    versionFile.write(new JsonBuilder(versionJSON).toPrettyString())
+
+    // Apply version code to all variants. This is necessary
+    // so when we build the APK, it gets the updated values
+    android.applicationVariants.all { variant ->
+        variant.mergedFlavor.versionCode = versionCode
+        variant.mergedFlavor.versionName = "${versionName}.${versionCode}"
+    }
+
+    // Add changes
+    def changes = grgit.status().unstaged.getAllChanges()
+    grgit.add(update: true, patterns: changes)
+
+    // Commit
+    grgit.commit(message: "Prepare for PlayStore release [ci skip]")
+
+    // Push
+    grgit.push()
+
+    // Tag
+    def tagName = "v${versionName}.${versionCode}"
+    grgit.tag.add(name: tagName, message: "Release ${tagName}")
+
+    // Push
+    grgit.push(refsOrSpecs: [tagName])
+}
+
+/***********************************************************************************************
+ * 
+ * Alpha Release Task
+ * 
+ */
+
+task releaseAlpha(dependsOn: ['prepareAlphaRelease', 'assembleAlphaRelease', 'crashlyticsUploadDistributionAlphaRelease'])
+tasks.whenTaskAdded { task ->
+    if (task.name.equals("crashlyticsUploadDistributionAlphaRelease")) {
+        task.mustRunAfter assembleAlphaRelease
+    } else if(task.name.equals("assembleAlphaRelease")){
+        task.mustRunAfter prepareAlphaRelease
+    }
+}
+
+task releaseAlphaPlayStore(dependsOn: ['prepareAlphaRelease', 'publishApkAlphaRelease'])
+tasks.whenTaskAdded { task ->
+    if (task.name.equals("publishApkAlphaRelease")) {
+        task.mustRunAfter prepareAlphaRelease
+    }
+}
+
+/***********************************************************************************************
+ * 
+ * Beta Release Task
+ * 
+ */
+
+task releaseBeta(dependsOn: ['prepareBetaRelease', 'crashlyticsUploadDistributionBetaRelease'])
+tasks.whenTaskAdded { task ->
+    if (task.name.equals("crashlyticsUploadDistributionBetaRelease")) {
+        task.mustRunAfter prepareBetaRelease
+    }
+}
+
+/***********************************************************************************************
+ * 
+ * Production Release Task
+ * 
+ */
+
+task releasePlayStore(dependsOn: ['preparePlayStoreRelease', 'publishApkProdRelease'])
+tasks.whenTaskAdded { task ->
+    if (task.name.equals("publishApkProdRelease")) {
+        task.mustRunAfter preparePlayStoreRelease
+    }
+}

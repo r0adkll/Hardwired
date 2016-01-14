@@ -1,6 +1,7 @@
 package com.r0adkll.hardwired;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
 
 import com.r0adkll.hardwired.HardwiredApp;
 
@@ -28,6 +29,10 @@ public class AppModule {
         return app;
     }
 
+    @Provides @Singleton
+    ConnectivityManager provideConnectivityManager(Context ctx){
+        return (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
+    }
 
 
 }

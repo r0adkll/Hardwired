@@ -21,7 +21,9 @@ import dagger.Component;
 @Component(
     modules = {
         AppModule.class,
-        DataModule.class
+        DataModule.class,
+        InfoModule.class,
+        FlavorModule.class
     }
 )
 public interface AppComponent {

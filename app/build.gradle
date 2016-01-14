@@ -1,6 +1,10 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'me.tatarka.retrolambda'
+apply from: '../release.gradle'
+
+def gitSha = 'git rev-parse --short HEAD'.execute([], project.rootDir).text.trim()
+def buildTime = new Date().format("yyyy-MM-dd'T'HH:mm'Z'", TimeZone.getTimeZone("UTC"))
 
 android {
     compileSdkVersion 23
@@ -12,8 +16,13 @@ android {
         minSdkVersion 17
         targetSdkVersion 23
 
-        versionCode 1
-        versionName "1.0"
+        versionCode project.ext.versionCode
+        versionName project.ext.versionName
+
+        buildConfigField "String", "GIT_SHA", "\"${gitSha}\""
+        buildConfigField "String", "BUILD_TIME", "\"${buildTime}\""
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -23,9 +32,33 @@ android {
         }
     }
 
+    productFlavors {
+        alpha {
+            versionName "alpha-v${project.ext.versionName}.${project.ext.versionCode}"
+        }
+
+        mock {
+            versionName "mock-v${project.ext.versionName}.${project.ext.versionCode}"
+        }
+
+        prod{}
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            output.outputFile = new File(
+                    output.outputFile.parent,
+                    "Hardwired-${variant.versionName}.apk")
+        }
     }
 }
 
@@ -39,6 +72,11 @@ dependencies {
     testCompile 'org.mockito:mockito-core:1.10.19'
     testCompile "org.robolectric:robolectric:3.0"
 
+    androidTestCompile 'com.android.support:support-annotations:23.1.1'
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.1'
+    androidTestCompile 'com.android.support.test:runner:0.4'
+    androidTestCompile 'com.android.support.test:rules:0.4'
+
     compile 'com.52inc:52Kit-core:0.4.2'
 
     compile 'com.michaelpardo:ollie:0.3.2-SNAPSHOT'
@@ -50,11 +88,7 @@ dependencies {
     compile 'com.vikingsen:pocketknife-core:3.1.0'
     apt 'com.vikingsen:pocketknife-compiler:3.1.0'
 
-    compile 'org.lucasr.twowayview:core:1.0.0-SNAPSHOT@aar'
-    compile 'org.lucasr.twowayview:layouts:1.0.0-SNAPSHOT@aar'
-
     compile 'com.android.support:appcompat-v7:23.1.1'
-
     compile 'com.android.support:design:23.1.1'
     compile 'com.android.support:cardview-v7:23.1.1'
 

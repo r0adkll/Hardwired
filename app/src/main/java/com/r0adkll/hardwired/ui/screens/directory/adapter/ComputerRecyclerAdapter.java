@@ -1,8 +1,6 @@
 package com.r0adkll.hardwired.ui.screens.directory.adapter;
 
-import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,20 +10,20 @@ import android.widget.TextView;
 
 import com.ftinc.kit.adapter.BetterRecyclerAdapter;
 import com.ftinc.kit.util.RxUtils;
-import com.ftinc.kit.util.UIUtils;
 import com.ftinc.kit.util.Utils;
 import com.r0adkll.hardwired.HardwiredApp;
 import com.r0adkll.hardwired.R;
 import com.r0adkll.hardwired.data.OpenHardwareMonitor;
 import com.r0adkll.hardwired.data.model.Computer;
-import com.trello.rxlifecycle.components.RxActivity;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
+
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import rx.functions.Action1;
+import rx.Observable;
 
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
@@ -83,12 +81,12 @@ public class ComputerRecyclerAdapter extends BetterRecyclerAdapter<Computer, Com
 
         public void bind(RxAppCompatActivity activity, OpenHardwareMonitor monitor, Computer item) {
             title.setText(item.name);
-            subtitle.setText(String.format("%s:%04d", item.ipAddress, item.port));
-            avatar.setImageResource(R.drawable.ic_lan_disconnect_black_24dp);
-            avatar.setColorFilter(activity.getResources().getColor(R.color.red_500));
+            subtitle.setText(String.format("%s:%d", item.ipAddress, item.port));
+            avatar.setImageResource(R.drawable.ic_lan_connect_black_24dp);
             avatar.setAlpha(0.56f);
 
             monitor.test(item.ipAddress, item.port)
+                    .repeatWhen(observable -> Observable.timer(10, TimeUnit.SECONDS).repeat())
                     .compose(activity.bindToLifecycle())
                     .compose(RxUtils.applyIOSchedulers())
                     .subscribe(computer -> {
@@ -96,7 +94,7 @@ public class ComputerRecyclerAdapter extends BetterRecyclerAdapter<Computer, Com
                         avatar.clearColorFilter();
                     }, throwable -> {
                         avatar.setImageResource(R.drawable.ic_lan_disconnect_black_24dp);
-                        avatar.setColorFilter(activity.getResources().getColor(R.color.red_500));
+                        avatar.setColorFilter(activity.getResources().getColor(R.color.red_600));
                     });
 
         }

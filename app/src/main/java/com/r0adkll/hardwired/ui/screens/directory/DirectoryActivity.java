@@ -1,6 +1,10 @@
 package com.r0adkll.hardwired.ui.screens.directory;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -17,18 +21,15 @@ import com.r0adkll.hardwired.ui.dialog.AddComputerDialog;
 import com.r0adkll.hardwired.ui.model.BaseActivity;
 import com.r0adkll.hardwired.ui.screens.detail.DetailActivity;
 import com.r0adkll.hardwired.ui.screens.directory.adapter.ComputerRecyclerAdapter;
-import com.r0adkll.hardwired.ui.screens.directory.adapter.DirectoryView;
-import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.Observable;
-import rx.functions.Action1;
+import timber.log.Timber;
 
 /**
  * Project: Hardwired
@@ -92,6 +93,16 @@ public class DirectoryActivity extends BaseActivity implements DirectoryView,
     protected void onResume() {
         super.onResume();
         presenter.loadComputers();
+
+        // Register connectivity listener
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(mConnectivityReceiver, filter);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(mConnectivityReceiver);
     }
 
     /***********************************************************************************************
@@ -140,6 +151,14 @@ public class DirectoryActivity extends BaseActivity implements DirectoryView,
                     presenter.loadComputers();
                 });
     }
+
+    private BroadcastReceiver mConnectivityReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Timber.d("Connectivity Change!");
+            adapter.notifyDataSetChanged();
+        }
+    };
 
     /***********************************************************************************************
      *
