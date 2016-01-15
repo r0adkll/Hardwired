@@ -8,6 +8,7 @@ import com.f2prateek.rx.preferences.Preference;
 import com.f2prateek.rx.preferences.RxSharedPreferences;
 import com.google.gson.Gson;
 import com.r0adkll.hardwired.util.qualifiers.RefreshInterval;
+import com.r0adkll.hardwired.util.qualifiers.ScreenLock;
 
 import javax.inject.Singleton;
 
@@ -24,6 +25,7 @@ import okhttp3.OkHttpClient;
 public class DataModule {
 
     public static final String PREF_REFRESH_INTERVAL = "pref_refresh_interval";
+    public static final String PREF_SCREEN_LOCK = "pref_screen_lock";
 
     @Provides @Singleton
     Gson provideGson(){
@@ -43,6 +45,11 @@ public class DataModule {
     @Provides @Singleton @RefreshInterval
     Preference<Long> provideRefreshIntervalPreference(RxSharedPreferences prefs){
         return prefs.getLong(PREF_REFRESH_INTERVAL, 5L);
+    }
+
+    @Provides @Singleton @ScreenLock
+    Preference<Boolean> provideScreenLockPreference(RxSharedPreferences prefs){
+        return prefs.getBoolean(PREF_SCREEN_LOCK, false);
     }
 
 }

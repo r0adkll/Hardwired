@@ -13,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SimpleItemAnimator;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.WindowManager;
 
 import com.f2prateek.rx.preferences.Preference;
 import com.ftinc.kit.util.RxUtils;
@@ -24,6 +25,7 @@ import com.r0adkll.hardwired.data.model.Computer;
 import com.r0adkll.hardwired.ui.model.BaseActivity;
 import com.r0adkll.hardwired.ui.screens.detail.adapter.ComponentRecyclerAdapter;
 import com.r0adkll.hardwired.util.qualifiers.RefreshInterval;
+import com.r0adkll.hardwired.util.qualifiers.ScreenLock;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -79,6 +81,9 @@ public class DetailActivity extends BaseActivity implements DetailView {
     @Inject @RefreshInterval
     Preference<Long> refreshIntervalPreference;
 
+    @Inject @ScreenLock
+    Preference<Boolean> screenLockPreference;
+
     private ComponentRecyclerAdapter adapter;
 
     /***********************************************************************************************
@@ -127,6 +132,10 @@ public class DetailActivity extends BaseActivity implements DetailView {
                 menu.findItem(R.id.refresh_5sec).setChecked(true);
         }
 
+        MenuItem screenLock = menu.findItem(R.id.action_screen_lock);
+        screenLock.setIcon(screenLockPreference.get() ?
+                R.drawable.ic_lock_white_24dp : R.drawable.ic_lock_open_white_24dp);
+
         return true;
     }
 
@@ -148,6 +157,18 @@ public class DetailActivity extends BaseActivity implements DetailView {
                 return true;
             case R.id.refresh_5sec:
                 presenter.updateRefreshInterval(5);
+                return true;
+            case R.id.action_screen_lock:
+                boolean isScreenLocked = screenLockPreference.get();
+                screenLockPreference.set(!isScreenLocked);
+                supportInvalidateOptionsMenu();
+
+                if(isScreenLocked){
+                    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                }else{
+                    getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                }
+
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -194,6 +215,12 @@ public class DetailActivity extends BaseActivity implements DetailView {
         RecyclerView.ItemAnimator animator = recycler.getItemAnimator();
         if (animator instanceof SimpleItemAnimator) {
             ((SimpleItemAnimator) animator).setSupportsChangeAnimations(false);
+        }
+
+        if(screenLockPreference.get()){
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        }else{
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         }
     }
 
