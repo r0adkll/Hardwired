@@ -91,6 +91,8 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:design:23.1.1'
     compile 'com.android.support:cardview-v7:23.1.1'
+    compile 'com.android.support:preference-v7:23.1.1'
+    compile 'com.android.support:preference-v14:23.1.1'
 
     compile 'com.trello:rxlifecycle:0.4.0'
     compile 'com.trello:rxlifecycle-components:0.4.0'

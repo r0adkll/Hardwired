@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <PreferenceCategory android:title="App">
+
+        <Preference android:key="pref_version"
+                    android:title="@string/setting_version"
+                    tools:summary="1.0.0"
+                    />
+
+        <Preference android:key="pref_licenses"
+                    android:title="@string/setting_licenses"
+                    android:summary="@string/setting_licenses_summary"
+                    />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Developer">
+
+        <Preference
+            android:key="pref_author_by"
+            android:title="@string/setting_author_title"
+            android:summary="@string/setting_author_summary"
+            />
+
+        <Preference
+            android:key="pref_author_support"
+            android:title="@string/setting_support_title"
+            android:summary="@string/setting_support_summary"
+            />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

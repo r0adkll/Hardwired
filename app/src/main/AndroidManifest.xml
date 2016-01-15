@@ -21,6 +21,7 @@
         </activity>
 
         <activity android:name=".ui.screens.detail.DetailActivity" />
+        <activity android:name=".ui.screens.screens.SettingsActivity" />
 
     </application>
 

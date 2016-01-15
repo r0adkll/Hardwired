@@ -11,4 +11,12 @@
     <string name="dialog_add_computer_title">Add computer</string>
     <string name="empty_message_directory">No computers have been added. Click the \'+\' button to get started.</string>
     <string name="empty_message_detail">No hardware data found for this computer. Please check your connection.</string>
+    <string name="setting_version">Version</string>
+    <string name="setting_licenses">Acknowledgements</string>
+    <string name="setting_licenses_summary">3rd Party Licenses</string>
+    <string name="setting_author_title">Developed By</string>
+    <string name="setting_author_summary">r0adkll</string>
+    <string name="setting_support_title">Having a problem?</string>
+    <string name="setting_support_summary">veedubusc@gmail.com</string>
+    <string name="activity_settings">Settings</string>
 </resources>

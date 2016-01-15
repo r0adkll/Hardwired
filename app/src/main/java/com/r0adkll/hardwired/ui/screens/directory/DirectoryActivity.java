@@ -10,6 +10,8 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.ftinc.kit.adapter.BetterRecyclerAdapter;
@@ -21,6 +23,7 @@ import com.r0adkll.hardwired.ui.dialog.AddComputerDialog;
 import com.r0adkll.hardwired.ui.model.BaseActivity;
 import com.r0adkll.hardwired.ui.screens.detail.DetailActivity;
 import com.r0adkll.hardwired.ui.screens.directory.adapter.ComputerRecyclerAdapter;
+import com.r0adkll.hardwired.ui.screens.screens.SettingsActivity;
 
 import java.util.List;
 
@@ -87,6 +90,21 @@ public class DirectoryActivity extends BaseActivity implements DirectoryView,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_directory);
         init();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_directory, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.action_settings){
+            startActivity(new Intent(this, SettingsActivity.class));
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
