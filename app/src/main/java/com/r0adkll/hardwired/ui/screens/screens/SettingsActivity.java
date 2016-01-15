@@ -5,6 +5,8 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
 import android.view.View;
 
+import com.ftinc.kit.attributr.Attributr;
+import com.ftinc.kit.util.IntentUtils;
 import com.r0adkll.hardwired.AppComponent;
 import com.r0adkll.hardwired.BuildConfig;
 import com.r0adkll.hardwired.R;
@@ -53,13 +55,13 @@ public class SettingsActivity extends BaseActivity {
         public boolean onPreferenceTreeClick(Preference preference) {
             switch (preference.getKey()){
                 case "pref_author_by":
-
+                    startActivity(IntentUtils.openLink("http://blog.r0adkll.com"));
                     return true;
                 case "pref_author_support":
-
+                    startActivity(IntentUtils.sendEmail("veedubusc+hardwired@gmail.com", "Hardwired Support", ""));
                     return true;
                 case "pref_licenses":
-
+                    Attributr.openLicenses(getActivity(), R.xml.example_licenses);
                     return true;
             }
             return super.onPreferenceTreeClick(preference);

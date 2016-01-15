@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Licenses>
+
+    <Library license="apache">
+        <Name>support-v4, appcompat-v7, cardview-v7, recyclerview-v7</Name>
+        <Author>The Android Open Source Project</Author>
+        <Year>2014</Year>
+        <Url>http://developer.android.com/tools/support-library/index.html</Url>
+    </Library>
+
+    <Library license="apache">
+        <Name>52Kit</Name>
+        <Author>52inc</Author>
+        <Year>2015</Year>
+        <Description>A library with common tools for building Android applications</Description>
+        <Url>https://github.com/52inc/android-52Kit</Url>
+        <Email>support@52inc.com</Email>
+    </Library>
+
+    <Library license="apache">
+        <Name>Dagger2</Name>
+        <Author>Google, Inc.</Author>
+        <Year>2012</Year>
+        <Url>https://github.com/google/dagger</Url>
+    </Library>
+
+    <Library license="apache">
+        <Name>Timber</Name>
+        <Author>Jake Wharton</Author>
+        <Year>2013</Year>
+        <Url>https://github.com/JakeWharton/timber</Url>
+        <Email>jakewharton@gmail.com</Email>
+    </Library>
+
+    <Library license="apache">
+        <Name>Butterknife</Name>
+        <Author>Jake Wharton</Author>
+        <Year>2013</Year>
+        <Url>https://github.com/JakeWharton/butterknife</Url>
+        <Email>jakewharton@gmail.com</Email>
+    </Library>
+
+    <Library license="apache">
+        <Name>StickHeadersRecyclerView</Name>
+        <Author>Jacob Tabak - Timehop</Author>
+        <Year>2014</Year>
+        <Url>https://github.com/timehop/sticky-headers-recyclerview/</Url>
+    </Library>
+
+    <Library license="apache">
+        <Name>OkHttp</Name>
+        <Author>Square, Inc.</Author>
+        <Year>2013</Year>
+        <Url>https://github.com/square/okhttp</Url>
+    </Library>
+
+    <Library license="apache">
+        <Name>RxJava</Name>
+        <Author>Netflix, Inc.</Author>
+        <Year>2013</Year>
+        <Url>https://github.com/ReactiveX/RxJava/</Url>
+    </Library>
+
+    <Library license="apache">
+        <Name>Ollie</Name>
+        <Author>Michael Pardo</Author>
+        <Year>2014</Year>
+        <Url>https://github.com/pardom/Ollie</Url>
+    </Library>
+
+    <Library license="apache">
+        <Name>gradle-retrolamda</Name>
+        <Author>Evan Tatarka</Author>
+        <Year>2013</Year>
+        <Url>https://github.com/evant/gradle-retrolambda</Url>
+    </Library>
+
+    <Library license="apache">
+        <Name>Rx Preferences</Name>
+        <Author>Prateek Srivastava</Author>
+        <Year>2014</Year>
+        <Url>https://github.com/f2prateek/rx-preferences</Url>
+    </Library>
+
+    <Library license="apache">
+        <Name>Pocket Knife</Name>
+        <Author>Jordan Hansen</Author>
+        <Year>2015</Year>
+        <Url>https://github.com/hansenji/pocketknife</Url>
+    </Library>
+
+
+</Licenses><!-- From: file:/Users/drew.heavner/Documents/Projects/Workbench/Workspace/android-52Kit/library/src/main/res/xml/example_licenses.xml -->
