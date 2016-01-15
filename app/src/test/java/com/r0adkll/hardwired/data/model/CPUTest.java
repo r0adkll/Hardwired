@@ -47,7 +47,7 @@ public class CPUTest {
 
     @Test
     public void testGetCoreLoads() throws Exception {
-        Component loadContainerMock = mock(Component.class);
+        Component loadContainerMock = new Component();
         loadContainerMock.title = "Load";
         loadContainerMock.components = new ArrayList<>(8);
 
@@ -83,7 +83,7 @@ public class CPUTest {
 
     @Test
     public void testGetCoreClocks() throws Exception {
-        Component loadContainerMock = mock(Component.class);
+        Component loadContainerMock = new Component();
         loadContainerMock.title = "Clocks";
         loadContainerMock.components = new ArrayList<>(8);
 

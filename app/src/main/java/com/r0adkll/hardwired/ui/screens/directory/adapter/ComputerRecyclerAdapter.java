@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.ftinc.kit.adapter.BetterRecyclerAdapter;
 import com.ftinc.kit.util.RxUtils;
+import com.ftinc.kit.util.UIUtils;
 import com.ftinc.kit.util.Utils;
 import com.r0adkll.hardwired.HardwiredApp;
 import com.r0adkll.hardwired.R;
@@ -74,6 +75,9 @@ public class ComputerRecyclerAdapter extends BetterRecyclerAdapter<Computer, Com
             super(itemView);
             ButterKnife.bind(this, itemView);
 
+            title.setTextColor(UIUtils.getColorAttr(itemView.getContext(), android.R.attr.textColorPrimary));
+            subtitle.setTextColor(UIUtils.getColorAttr(itemView.getContext(), android.R.attr.textColorSecondary));
+
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
             params.leftMargin = Utils.dipToPx(itemView.getContext(), 16);
             avatar.setLayoutParams(params);
@@ -86,7 +90,6 @@ public class ComputerRecyclerAdapter extends BetterRecyclerAdapter<Computer, Com
             avatar.setAlpha(0.56f);
 
             monitor.test(item.ipAddress, item.port)
-                    .repeatWhen(observable -> Observable.timer(10, TimeUnit.SECONDS).repeat())
                     .compose(activity.bindToLifecycle())
                     .compose(RxUtils.applyIOSchedulers())
                     .subscribe(computer -> {

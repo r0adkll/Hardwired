@@ -1,7 +1,10 @@
 package com.r0adkll.hardwired.ui.dialog;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -13,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.ftinc.kit.util.BuildUtils;
 import com.ftinc.kit.util.RxUtils;
 import com.ftinc.kit.util.Utils;
 import com.r0adkll.hardwired.HardwiredApp;
@@ -92,7 +96,6 @@ public class AddComputerDialog extends RxDialogFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         HardwiredApp.get(getActivity()).inject(this);
-        getDialog().setTitle(R.string.dialog_add_computer_title);
 
         inputIpAddress.addTextChangedListener(new TextWatcher() {
             @Override public void onTextChanged(CharSequence s, int start, int before, int count) {}
@@ -111,6 +114,17 @@ public class AddComputerDialog extends RxDialogFragment {
             }
         });
 
+    }
+
+    @NonNull
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        if (BuildUtils.isLollipop()) {
+            setStyle(STYLE_NORMAL, android.R.style.Theme_Material_Light_Dialog_Alert);
+        }
+        Dialog dialog = super.onCreateDialog(savedInstanceState);
+        dialog.setTitle(R.string.dialog_add_computer_title);
+        return dialog;
     }
 
     @Nullable
