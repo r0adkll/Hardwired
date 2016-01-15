@@ -194,6 +194,7 @@ public class DetailActivity extends BaseActivity implements DetailView {
                 Component cmp = adapter.getItem(position);
                 switch (cmp.getType()){
                     case Component.MOTHERBOARD:
+                        return getResources().getInteger(R.integer.grid_columns);
                     case Component.CPU:
                     case Component.GRAPHICS:
                         return 2;
@@ -217,10 +218,10 @@ public class DetailActivity extends BaseActivity implements DetailView {
             ((SimpleItemAnimator) animator).setSupportsChangeAnimations(false);
         }
 
-        if(screenLockPreference.get()){
-            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        }else{
+        if (screenLockPreference.get()) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        } else {
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         }
     }
 
