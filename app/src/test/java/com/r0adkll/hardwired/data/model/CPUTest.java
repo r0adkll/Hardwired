@@ -60,7 +60,6 @@ public class CPUTest {
 
         // Validate method
         List<Load> load = mockCpu.getCoreLoads();
-        assertTrue(!load.isEmpty());
         assertEquals(load.size(), numCores);
     }
 
@@ -96,25 +95,18 @@ public class CPUTest {
 
         // Validate method
         List<Clock> load = mockCpu.getCoreClocks();
-        assertTrue(!load.isEmpty());
         assertEquals(load.size(), numCores);
     }
 
     private Component generateCoreLoadMock(int index){
-        Component loadMock = mock(Component.class);
+        Component loadMock = new Component();
         loadMock.title = String.format("CPU Core #%d", index);
-        when(loadMock.getComponent(Load.class))
-                .thenReturn(mock(Load.class));
-
         return loadMock;
     }
 
     private Component generateCoreClockMock(int index){
-        Component clockMock = mock(Component.class);
+        Component clockMock = new Component();
         clockMock.title = String.format("CPU Core #%d", index);
-        when(clockMock.getComponent(Clock.class))
-                .thenReturn(mock(Clock.class));
-
         return clockMock;
     }
 
