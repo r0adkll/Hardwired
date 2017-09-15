@@ -116,6 +116,14 @@ public class Component {
         }
     }
 
+    public boolean isSameItem(Component component) {
+        return this.id == component.id;
+    }
+
+    public boolean isContentSame(Component component) {
+        return this == component;
+    }
+
     @Override
     public String toString() {
         return "Component{" +

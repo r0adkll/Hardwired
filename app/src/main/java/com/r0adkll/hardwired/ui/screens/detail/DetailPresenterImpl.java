@@ -44,7 +44,7 @@ public class DetailPresenterImpl implements DetailPresenter {
                 .repeatWhen(observable -> timer().repeat())
                 .compose(RxUtils.applyIOSchedulers())
                 .subscribe(component -> {
-                    Timber.d("Updating Computer[%s]", computer.name);
+                    Timber.d("Updating Computer[%s]: %s", computer.name, component.components);
                     view.updateComponents(component.components);
                 }, throwable -> {
                     view.showSnackBar(throwable.getLocalizedMessage());

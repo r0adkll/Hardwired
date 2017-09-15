@@ -32,7 +32,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import pocketknife.BindExtra;
 import pocketknife.SaveState;
 import timber.log.Timber;
@@ -65,10 +65,10 @@ public class DetailActivity extends BaseActivity implements DetailView {
      *
      */
 
-    @Bind(R.id.recycler)
+    @BindView(R.id.recycler)
     RecyclerView recycler;
 
-    @Bind(R.id.empty_layout)
+    @BindView(R.id.empty_layout)
     EmptyView emptyLayout;
 
     @SaveState
@@ -207,7 +207,7 @@ public class DetailActivity extends BaseActivity implements DetailView {
             }
         });
 
-        adapter = new ComponentRecyclerAdapter();
+        adapter = new ComponentRecyclerAdapter(this);
         adapter.setEmptyView(emptyLayout);
 
         recycler.setAdapter(adapter);
@@ -246,9 +246,7 @@ public class DetailActivity extends BaseActivity implements DetailView {
 
     @Override
     public void updateComponents(List<Component> components) {
-        adapter.clear();
-        adapter.addAll(components);
-        adapter.notifyDataSetChanged();
+        adapter.setComponents(components);
     }
 
 

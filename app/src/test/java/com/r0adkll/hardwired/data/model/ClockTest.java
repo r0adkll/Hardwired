@@ -8,7 +8,7 @@ import com.r0adkll.hardwired.BuildConfig;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricGradleTestRunner;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 import static org.junit.Assert.*;
@@ -20,7 +20,7 @@ import static org.mockito.Mockito.when;
  * Package: com.r0adkll.hardwired.data.model
  * Created by drew.heavner on 1/14/16.
  */
-@RunWith(RobolectricGradleTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.KITKAT)
 public class ClockTest {
 

@@ -11,7 +11,7 @@ import com.r0adkll.hardwired.data.model.MOBO;
 import com.r0adkll.hardwired.ui.screens.detail.adapter.ComponentDelegate;
 import com.r0adkll.hardwired.ui.screens.detail.adapter.ComponentViewHolder;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -55,9 +55,9 @@ public class MotherboardDelegate extends ComponentDelegate<MOBO, MotherboardDele
 
     static class MotherboardViewHolder extends ComponentViewHolder<MOBO> {
 
-        @Bind(R.id.title)
+        @BindView(R.id.title)
         TextView title;
-        @Bind(R.id.card)
+        @BindView(R.id.card)
         CardView card;
 
         public MotherboardViewHolder(LayoutInflater inflater, ViewGroup parent) {

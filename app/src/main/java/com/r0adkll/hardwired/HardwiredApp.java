@@ -6,6 +6,7 @@ import android.content.Context;
 
 import com.r0adkll.hardwired.data.DataModule;
 
+import butterknife.ButterKnife;
 import ollie.Ollie;
 import timber.log.Timber;
 

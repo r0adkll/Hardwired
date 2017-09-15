@@ -29,7 +29,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.OnClick;
 import rx.Observable;
 import timber.log.Timber;
@@ -65,17 +65,11 @@ public class DirectoryActivity extends BaseActivity implements DirectoryView,
      *
      */
 
-    @Bind(R.id.recycler)
-    RecyclerView recycler;
+    @BindView(R.id.recycler) RecyclerView recycler;
+    @BindView(R.id.empty_view) EmptyView emptyView;
+    @BindView(R.id.action_add) FloatingActionButton actionAdd;
 
-    @Bind(R.id.empty_view)
-    EmptyView emptyView;
-
-    @Bind(R.id.action_add)
-    FloatingActionButton actionAdd;
-
-    @Inject
-    DirectoryPresenter presenter;
+    @Inject DirectoryPresenter presenter;
 
     private ComputerRecyclerAdapter adapter;
 

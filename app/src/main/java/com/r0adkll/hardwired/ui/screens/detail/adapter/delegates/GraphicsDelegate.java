@@ -15,7 +15,7 @@ import com.r0adkll.hardwired.data.model.Temperature;
 import com.r0adkll.hardwired.ui.screens.detail.adapter.ComponentDelegate;
 import com.r0adkll.hardwired.ui.screens.detail.adapter.ComponentViewHolder;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -50,21 +50,21 @@ public class GraphicsDelegate extends ComponentDelegate<GPU, GraphicsDelegate.Gr
 
     static class GraphicsViewHolder extends ComponentViewHolder<GPU> {
 
-        @Bind(R.id.title)
+        @BindView(R.id.title)
         TextView title;
-        @Bind(R.id.load_total)
+        @BindView(R.id.load_total)
         TextView loadTotal;
 
-        @Bind(R.id.core_clock_speed)
+        @BindView(R.id.core_clock_speed)
         TextView coreClockSpeed;
-        @Bind(R.id.memory_clock_speed)
+        @BindView(R.id.memory_clock_speed)
         TextView memoryClockSpeed;
-        @Bind(R.id.temperature)
+        @BindView(R.id.temperature)
         TextView temperature;
-        @Bind(R.id.fan_speed)
+        @BindView(R.id.fan_speed)
         TextView fanSpeed;
 
-        @Bind(R.id.card)
+        @BindView(R.id.card)
         CardView card;
 
         public GraphicsViewHolder(LayoutInflater inflater, ViewGroup parent) {

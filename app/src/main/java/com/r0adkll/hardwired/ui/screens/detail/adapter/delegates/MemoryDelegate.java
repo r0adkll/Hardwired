@@ -13,7 +13,7 @@ import com.r0adkll.hardwired.data.model.RAM;
 import com.r0adkll.hardwired.ui.screens.detail.adapter.ComponentDelegate;
 import com.r0adkll.hardwired.ui.screens.detail.adapter.ComponentViewHolder;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -47,13 +47,13 @@ public class MemoryDelegate extends ComponentDelegate<RAM, MemoryDelegate.Memory
 
     static class MemoryViewHolder extends ComponentViewHolder<RAM> {
 
-        @Bind(R.id.title)
+        @BindView(R.id.title)
         TextView title;
-        @Bind(R.id.load_total)
+        @BindView(R.id.load_total)
         TextView loadTotal;
-        @Bind(R.id.usage)
+        @BindView(R.id.usage)
         TextView usage;
-        @Bind(R.id.card)
+        @BindView(R.id.card)
         CardView card;
 
         public MemoryViewHolder(LayoutInflater inflater, ViewGroup parent) {

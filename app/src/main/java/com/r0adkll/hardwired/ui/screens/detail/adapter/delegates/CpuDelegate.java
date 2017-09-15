@@ -17,7 +17,7 @@ import com.r0adkll.hardwired.ui.screens.detail.adapter.ComponentViewHolder;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -51,16 +51,16 @@ public class CpuDelegate extends ComponentDelegate<CPU, CpuDelegate.CpuViewHolde
 
     public static class CpuViewHolder extends ComponentViewHolder<CPU> {
 
-        @Bind(R.id.title)
+        @BindView(R.id.title)
         TextView title;
 
-        @Bind(R.id.load_total)
+        @BindView(R.id.load_total)
         TextView loadTotal;
 
-        @Bind(R.id.cores_layout)
+        @BindView(R.id.cores_layout)
         LinearLayout coresLayout;
 
-        @Bind(R.id.card)
+        @BindView(R.id.card)
         CardView card;
 
         public CpuViewHolder(LayoutInflater inflater, ViewGroup parent) {

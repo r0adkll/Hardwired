@@ -29,10 +29,11 @@ import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnTextChanged;
+import butterknife.Unbinder;
 import rx.Observable;
 import rx.functions.Action1;
 import rx.subjects.PublishSubject;
@@ -60,22 +61,23 @@ public class AddComputerDialog extends RxDialogFragment {
      *
      */
 
-    @Bind(R.id.input_ip_address)
+    @BindView(R.id.input_ip_address)
     EditText inputIpAddress;
-    @Bind(R.id.input_port)
+    @BindView(R.id.input_port)
     EditText inputPort;
 
-    @Bind(R.id.action_positive)
+    @BindView(R.id.action_positive)
     TextView actionPositive;
 
-    @Bind(R.id.loading)
+    @BindView(R.id.loading)
     ProgressBar loading;
-    @Bind(R.id.error_message)
+    @BindView(R.id.error_message)
     TextView errorMessage;
 
     @Inject
     OpenHardwareMonitor monitor;
 
+    private Unbinder unbinder;
     private PublishSubject<Computer> mSubject = PublishSubject.create();
 
     /***********************************************************************************************
@@ -131,14 +133,14 @@ public class AddComputerDialog extends RxDialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dialog_add_computer, container, false);
-        ButterKnife.bind(this, view);
+        unbinder = ButterKnife.bind(this, view);
         return view;
     }
 
     @Override
     public void onDestroyView() {
+        unbinder.unbind();
         super.onDestroyView();
-        ButterKnife.unbind(this);
     }
 
     private void checkInputs(){
@@ -178,7 +180,6 @@ public class AddComputerDialog extends RxDialogFragment {
                         .doOnNext(computer -> computer.save())
                         .compose(bindToLifecycle())
                         .compose(RxUtils.applyIOSchedulers())
-                        .compose(RxUtils.applyLogging("Monitor"))
                         .subscribe(computer -> {
                             mSubject.onNext(computer);
                             mSubject.onCompleted();

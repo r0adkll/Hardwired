@@ -13,7 +13,7 @@ import com.r0adkll.hardwired.data.model.Temperature;
 import com.r0adkll.hardwired.ui.screens.detail.adapter.ComponentDelegate;
 import com.r0adkll.hardwired.ui.screens.detail.adapter.ComponentViewHolder;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -48,13 +48,13 @@ public class StorageDelegate extends ComponentDelegate<HDD, StorageDelegate.Grap
     static class GraphicsViewHolder extends ComponentViewHolder<HDD> {
 
 
-        @Bind(R.id.title)
+        @BindView(R.id.title)
         TextView title;
-        @Bind(R.id.load_total)
+        @BindView(R.id.load_total)
         TextView loadTotal;
-        @Bind(R.id.temperature)
+        @BindView(R.id.temperature)
         TextView temperature;
-        @Bind(R.id.card)
+        @BindView(R.id.card)
         CardView card;
 
         public GraphicsViewHolder(LayoutInflater inflater, ViewGroup parent) {

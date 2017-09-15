@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.ftinc.kit.adapter.BetterRecyclerAdapter;
 import com.ftinc.kit.util.RxUtils;
+import com.ftinc.kit.util.SizeUtils;
 import com.ftinc.kit.util.UIUtils;
 import com.ftinc.kit.util.Utils;
 import com.r0adkll.hardwired.HardwiredApp;
@@ -22,7 +23,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import rx.Observable;
 
@@ -59,11 +60,11 @@ public class ComputerRecyclerAdapter extends BetterRecyclerAdapter<Computer, Com
 
     static class ComputerViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.avatar)
+        @BindView(R.id.avatar)
         ImageView avatar;
-        @Bind(R.id.line_1)
+        @BindView(R.id.line_1)
         TextView title;
-        @Bind(R.id.line_2)
+        @BindView(R.id.line_2)
         TextView subtitle;
 
         public static ComputerViewHolder create(LayoutInflater inflater, ViewGroup parent) {
@@ -79,7 +80,7 @@ public class ComputerRecyclerAdapter extends BetterRecyclerAdapter<Computer, Com
             subtitle.setTextColor(UIUtils.getColorAttr(itemView.getContext(), android.R.attr.textColorSecondary));
 
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
-            params.leftMargin = Utils.dipToPx(itemView.getContext(), 16);
+            params.leftMargin = SizeUtils.dipToPx(itemView.getContext(), 16);
             avatar.setLayoutParams(params);
         }
 
